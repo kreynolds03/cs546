@@ -8,7 +8,7 @@ const database = module.exports = () => {
     }
 
     try {
-        mongoose.connect('mongodb+srv://RaginiWadhwa:74gzN5HTfBMDr6a2@finalproject.iw2gnyl.mongodb.net/final_project_2022?retryWrites=true&w=majority')
+        mongoose.connect('mongodb+srv://RaginiWadhwa:<ENTER YOUR PASSWORD>@finalproject.iw2gnyl.mongodb.net/final_project_2022?retryWrites=true&w=majority')
         console.log("Database connected successfully!");
     } catch (error) {
 
