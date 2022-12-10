@@ -1,7 +1,11 @@
 import React from "react";
 import logo from './logo.svg';
 import './App.css';
-const mongoCollections = require('../MongoConnection/database');
+//const mongoCollections = require('../public');
+///workspaces/cs546/MongoConnection
+const path = require('path');
+const mongoCollections = path.join(__dirname, 'mongoCollection.js');
+
 const users = mongoCollections.users;
 
 function App() {
