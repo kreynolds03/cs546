@@ -1,30 +1,17 @@
 import React from "react";
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 //const mongoCollections = require('../public');
 ///workspaces/cs546/MongoConnection
-const path = require('path');
-const mongoCollections = path.join(__dirname, 'mongoCollection.js');
+//const path = require('path');
+//const mongoCollections = path.join(__dirname, 'mongoCollection.js');
 
-const users = mongoCollections.users;
+//const users = mongoCollections.users; // Not using this here, using axios to pull from routes
 
 function App() {
-  const [data, setData] = React.useState(null);
+ // const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
-  );
+  return null;
 }
 
 export default App;
