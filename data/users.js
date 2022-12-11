@@ -3,40 +3,59 @@ const users = mongoCollections.users;
 const bcrypt = require("bcrypt");
 const helpers = require("./datahelpers");
 
-
+console.log(mongoCollections);
 
 const createUser = async (
   username, password
 ) => { 
 
+  console.log(1);
+
   if(!username || !password) {
     throw "Please supply both a username and password";
   }
 
+  console.log(2);
+
+
   if(typeof username !== 'string') {
     throw "Please supply only a string value for username";
   }
+
+  console.log(3);
 
 
   if(typeof password !== 'string') {
     throw "Please supply only a string value for password";
   }
 
+  console.log(4);
+
+
   if(password.length < 6 || username.length < 4) {
     throw "Your username or password was too short in length";
   }
 
+  console.log(5);
+
 
   helpers.isAlpha(username);
 
- 
+  console.log(6);
+
 
   username = username.toLowerCase();
+
+  console.log(7);
+
 
 
 
 
   const userCollection = await users();
+
+  console.log(8);
+
 
 
   const foundUser = await userCollection.find({username}).toArray();

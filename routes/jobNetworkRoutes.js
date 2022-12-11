@@ -15,7 +15,7 @@ const router = express.Router();
 
 function authMiddleware(req, res, next){
   if(!req.session.username) {
-    res.render("forbiddenAccess",403);
+    res.status(403).send({message: e});
   } else {
     next();
   }
@@ -26,8 +26,8 @@ router.route("/").get(async (req, res) => {
   //code here for GET
   //res.sendFile(path.join(__dirname,"./userLogin))
   //console.log("hello world");
-  res.render("userLogin");
-  if(!req.session.username) {
+  //res.render("userLogin");
+  if(!req.session?.username) {
 
     console.log(new Date().toUTCString() + ": GET / (Non-Authenticated User)");
   }
@@ -43,10 +43,9 @@ router.route("/").get(async (req, res) => {
 
 router
   .route("/register")
-  .get(async (req, res) => {
+  /*.get(async (req, res) => {
     //code here for GET
 
-    res.render("userRegister");
 
     if(!req.session.username) {
 
@@ -62,31 +61,35 @@ router
 
    
 
-  })
+  })*/
   .post(async (req, res) => {
     //code here for POST
 
     try {
-      let username = req.body.usernameInput;
-      let password = req.body.passwordInput;
+      console.log(req.body);
+      let username = req.body.username;
+      let password = req.body.password;
       await createUser(username, password);
       //req.session.username = username;
   
-      res.redirect("/");
+      //res.redirect("/");
   
      
     } catch (e) {
-      res.render("userRegister", { message: e });
+      return res.status(500).send({message: e});
     }
 
-    if(!req.session.username) {
+    if(!req.session?.username) {
 
       console.log(new Date().toUTCString() + ": POST /register (Non-Authenticated User)");
+      return res.sendStatus(200);
+
     }
   
     else {
   
       console.log(new Date().toUTCString() + ": POST /register (Authenticated User)");
+      return res.sendStatus(200);
   
   
     }
@@ -101,11 +104,11 @@ router.route("/login").post(async (req, res) => {
     await checkUser(username, password);
     req.session.username = username;
 
-    res.redirect("/protected");
+    //res.redirect("/protected");
 
    
   } catch (e) {
-    res.render("userLogin", { message: e });
+    res.status(500).send({message: e});
   }
 
   if(!req.session.username) {
@@ -124,10 +127,10 @@ router.route("/login").post(async (req, res) => {
 router.route("/protected").get(authMiddleware, async (req, res) => {
   //code here for GET
 
-  res.render("private", {
+  /*res.render("private", {
     username: req.session.username,
     date: new Date().toUTCString(),
-  })
+  })*/
 
   if(!req.session.username) {
 
@@ -161,7 +164,7 @@ router.route("/logout").get(async (req, res) => {
   req.session.destroy();
   //res.redirect("/");
 
-  res.render("logout")
+  //res.render("logout")
 
 
 
