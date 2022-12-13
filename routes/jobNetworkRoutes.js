@@ -69,7 +69,10 @@ router
       console.log(req.body);
       let username = req.body.username;
       let password = req.body.password;
-      await createUser(username, password);
+      let birthday = req.body.birthday;
+      let firstName = req.body.firstName;
+      let lastName = req.body.lastName;
+      await createUser(username, password, birthday, firstName, lastName);
       //req.session.username = username;
   
       //res.redirect("/");
