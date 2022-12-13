@@ -1,6 +1,7 @@
 import React from "react";
 //import logo from './logo.svg';
 import './App.css';
+import LoginForm from './components/LoginForm';
 //const mongoCollections = require('../public');
 ///workspaces/cs546/MongoConnection
 //const path = require('path');
@@ -10,6 +11,9 @@ import './App.css';
 
 function App() {
  // const [data, setData] = React.useState(null);
+ <div>
+  <LoginForm />
+ </div>
 
   return null;
 }

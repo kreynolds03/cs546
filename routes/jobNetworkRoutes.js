@@ -102,10 +102,10 @@ router.route("/login").post(async (req, res) => {
   //code here for POST
 
   try {
-    let username = req.body.usernameInput;
-    let password = req.body.passwordInput;
+    let username = req.body.username; //might change depending on how we do our input in react
+    let password = req.body.password;
     await checkUser(username, password);
-    req.session.username = username;
+    //req.session.username = username;
 
     //res.redirect("/protected");
 
@@ -114,14 +114,18 @@ router.route("/login").post(async (req, res) => {
     res.status(500).send({message: e});
   }
 
-  if(!req.session.username) {
+  if(!req.session?.username) {
 
     console.log(new Date().toUTCString() + ": POST /login (Non-Authenticated User)");
+    return res.sendStatus(200);
+
   }
 
   else {
 
     console.log(new Date().toUTCString() + ": POST /login (Authenticated User)");
+    return res.sendStatus(200);
+
 
 
   }
