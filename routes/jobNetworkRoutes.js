@@ -177,4 +177,7 @@ router.route("/logout").get(async (req, res) => {
 
 });
 
+router
+  .route("/joblistings")
+
 module.exports = router;
