@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router();
 const data = require('../data');
-const jobData = data.jobs;
+const jobData = data.jobListings;
 //const helper = require('../helpers')
 /*
 Need to finish the data folder and create the job collection
 */
 
-router//add req parameter
+router
   .route('/jobs')
   .get(async (req,res) => {
     try {
