@@ -70,15 +70,17 @@ router
 
     try {
       console.log(req.body);
-      let username = req.body.username;
+      let email = req.body.email;
       let password = req.body.password;
+      let username = req.body.username;
       let birthday = req.body.birthday;
       let firstName = req.body.firstName;
       let lastName = req.body.lastName;
-      await createUser(username, password, birthday, firstName, lastName);
+      let bio = req.body.bio
+      await createUser(email, password, username, birthday, firstName, lastName, bio);
       //req.session.username = username;
   
-      //res.redirect("/");
+      res.redirect("/");
   
      
     } catch (e) {

@@ -6,13 +6,19 @@ const helpers = require("./datahelpers");
 console.log(mongoCollections);
 
 const createUser = async (
-  firstName, lastName, birthday, username, password
+  email, 
+  password,
+  username,
+  birthday, 
+  firstName,
+  lastName,
+  bio
 ) => { 
 
   //console.log(1);
 
-  if(!username || !password || !lastName || !firstName || !birthday) {
-    throw "Please supply, first name, lastname, birthday, username, and password";
+  if(!username || !password || !lastName || !firstName || !birthday || !email) {
+    throw "Please supply, first name, lastname, email, birthday, username, and password";
   }
 
   //console.log(2);
@@ -67,9 +73,26 @@ const createUser = async (
   }
 
   const hash = await bcrypt.hash(password, 10)
+  const newUser = 
+  {
+    email: email,
+    password: hash,
+    username: username,
+    birthday: birthday,
+    firstName: firstName,
+    bio: bio,
+    logo: null,
+    jobs: [],
+    posts: [],
+    comments: [],
+    followedUsers: [],
+    likedPosts: [],
+    jobListings: []
+
+  };
 
   
-  const dataInput =  await userCollection.insertOne({firstName, lastName, birthday, username, password:hash});
+  const dataInput =  await userCollection.insertOne(newUser);
 
   if (dataInput.insertedCount === 0) throw 'Could not add user';
 
