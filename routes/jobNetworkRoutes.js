@@ -6,6 +6,8 @@ const { createUser } = require("../data/users");
 //const { getAllJobs } = require("../data/jobListings");
 const jobs = require("../data/jobListings");
 const companyList = require("../data/company");
+const posts =  require("../data/posts");
+
 
 
 //const path = require("path");
@@ -270,6 +272,25 @@ router.route("/logout").get(async (req, res) => {
       let username = req.body.username;
       
       await jobs.createJob(jobTitle, education, yearsofExp, description, company, postDate, username);
+      
+  
+     
+    } catch (e) {
+      return res.status(500).send({message: e});
+    }
+  })
+
+  router
+  .route('/createpost')
+  .post(async (req, res) => {
+    
+
+    try {
+      console.log(req.body);
+      let title = req.body.title;
+      let content = req.body.content;
+      
+      await posts.createPost(title, content);
       
   
      
