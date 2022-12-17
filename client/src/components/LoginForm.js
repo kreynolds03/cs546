@@ -14,8 +14,8 @@ function LoginForm() {
 
         <div class="loginform">
             <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username"></input>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email"></input>
                 <br></br>
                 <label for="password">Password:</label>
                 <input type="text" id="password" name="password"></input>

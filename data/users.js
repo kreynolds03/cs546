@@ -8,7 +8,6 @@ console.log(mongoCollections);
 const createUser = async (
   email, 
   password,
-  username,
   birthday, 
   firstName,
   lastName,
@@ -17,8 +16,8 @@ const createUser = async (
 
   //console.log(1);
 
-  if(!username || !password || !lastName || !firstName || !birthday || !email) {
-    throw "Please supply, first name, lastname, email, birthday, username, and password";
+  if(!password || !lastName || !firstName || !birthday || !email) {
+    throw "Please supply, first name, lastname, email, birthday, and password";
   }
 
   //console.log(2);
@@ -38,6 +37,11 @@ const createUser = async (
   if(typeof firstName !== 'string' || typeof lastName != 'string') {
     throw "Please supply only a string value for first name and last name";
   }
+
+  if(typeof email !== 'string') {
+    throw "Please supply only a string value for email";
+  }
+
 
   //console.log(4);
 
@@ -77,7 +81,6 @@ const createUser = async (
   {
     email: email,
     password: hash,
-    username: username,
     birthday: birthday,
     firstName: firstName,
     bio: bio,
@@ -106,15 +109,15 @@ const createUser = async (
   return {insertedUser: true};
 };
 
-const checkUser = async (username, password) => { 
+const checkUser = async (email, password) => { 
 
 
-  if(!username || !password) {
+  if(!email || !password) {
     throw "Please supply both a username and password";
   }
 
-  if(typeof username !== 'string') {
-    throw "Please supply only a string value for username";
+  if(typeof email !== 'string') {
+    throw "Please supply only a string value for email";
   }
 
 
@@ -123,18 +126,18 @@ const checkUser = async (username, password) => {
   }
 
 
-  if(password.length < 6 || username.length < 4) {
-    throw "Your username or password was too short in length";
+  if(password.length < 6) {
+    throw "Your password was too short in length";
   }
 
   helpers.isAlpha(username);
 
-  username = username.toLowerCase();
+  email = email.toLowerCase();
 
   const userCollection = await users();
 
 
-  const foundUser = await userCollection.findOne({username});
+  const foundUser = await userCollection.findOne({email});
 
   if(!foundUser) {
     throw "Invalid username";
