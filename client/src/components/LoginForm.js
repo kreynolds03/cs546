@@ -14,14 +14,15 @@ function LoginForm() {
 
         <div class="loginform">
             <form>
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email"></input>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"></input>
                 <br></br>
                 <label for="password">Password:</label>
                 <input type="text" id="password" name="password"></input>
                 <br></br>
                 <br></br>
                 <button type="login">Login</button>
+                <button type="login">Sign Up</button>
                 <br></br>
                 <br></br>
             </form>

@@ -48,38 +48,70 @@ router.route("/").get(async (req, res) => {
 
 router
   .route("/register")
+  /*.get(async (req, res) => {
+    //code here for GET
+
+
+    if(!req.session.username) {
+
+      console.log(new Date().toUTCString() + ": GET /register (Non-Authenticated User)");
+    }
+  
+    else {
+  
+      console.log(new Date().toUTCString() + ": GET /register (Authenticated User)");
+  
+  
+    }
+
+   
+
+  })*/
   .post(async (req, res) => {
     //code here for POST
-    console.log("hello");
 
     try {
       console.log(req.body);
       let email = req.body.email;
       let password = req.body.password;
+      let username = req.body.username;
       let birthday = req.body.birthday;
       let firstName = req.body.firstName;
       let lastName = req.body.lastName;
-      await createUser(email, password, birthday, firstName, lastName);
+      let bio = req.body.bio
+      await createUser(email, password, username, birthday, firstName, lastName, bio);
+      //req.session.username = username;
   
       res.redirect("/");
-
-     return res.sendStatus(200);
-
   
      
     } catch (e) {
       return res.status(500).send({message: e});
     }
 
+    if(!req.session?.username) {
+
+      console.log(new Date().toUTCString() + ": POST /register (Non-Authenticated User)");
+      return res.sendStatus(200);
+
+    }
+  
+    else {
+  
+      console.log(new Date().toUTCString() + ": POST /register (Authenticated User)");
+      return res.sendStatus(200);
+  
+  
+    }
   });
 
 router.route("/login").post(async (req, res) => {
   //code here for POST
 
   try {
-    let email = req.body.email; //might change depending on how we do our input in react
+    let username = req.body.username; //might change depending on how we do our input in react
     let password = req.body.password;
-    await checkUser(email, password);
+    await checkUser(username, password);
     //req.session.username = username;
 
     //res.redirect("/protected");
@@ -144,7 +176,7 @@ router.route("/logout").get(async (req, res) => {
   }
 
   req.session.destroy();
-  res.redirect("/");
+  //res.redirect("/");
 
   //res.render("logout")
 
