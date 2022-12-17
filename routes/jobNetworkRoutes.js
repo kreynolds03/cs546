@@ -64,6 +64,9 @@ router
       await createUser(email, password, birthday, firstName, lastName);
   
       res.redirect("/");
+
+     return res.sendStatus(200);
+
   
      
     } catch (e) {
@@ -143,7 +146,7 @@ router.route("/logout").get(async (req, res) => {
   }
 
   req.session.destroy();
-  //res.redirect("/");
+  res.redirect("/");
 
   //res.render("logout")
 
