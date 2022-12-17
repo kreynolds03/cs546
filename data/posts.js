@@ -40,11 +40,11 @@ const createPost = async (
   
   };
 
-  const removePost = async (movieId) => {
-    movieId = helper.checkId(movieId);
-    const movieCollection = await movies();
+  const removePost = async (postId) => {
+    movieId = helpers.checkId(postId);
+    const postCollection = await postList();
   
-    return await movieCollection.deleteOne({_id: ObjectId(movieId)});
+    return await postCollection.deleteOne({_id: ObjectId(postId)});
   };
   
 
