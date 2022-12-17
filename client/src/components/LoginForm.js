@@ -22,7 +22,6 @@ function LoginForm() {
                 <br></br>
                 <br></br>
                 <button type="login">Login</button>
-                <button type="login">Sign Up</button>
                 <br></br>
                 <br></br>
             </form>
