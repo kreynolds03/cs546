@@ -1,6 +1,7 @@
 const mongoCollections = require("../MongoConnection/mongoCollection")
 const jobListings = mongoCollections.jobs;
 const companyList = mongoCollections.companies;
+const users = mongoCollections.users;
 
 
 const getAllJobs = async () => {
@@ -25,8 +26,49 @@ const getAllJobs = async () => {
   
     return oneCo.jobs;
   };
+  const createJob = async (
+    jobTitle,
+    education,
+    yearsofExp,
+    description,
+    company,
+    postDate,
+    username
+  ) => { 
+
+      const jobCollection = await jobListings();
+      const userCollection = await users ();
+      const foundUser = await userCollection.findOne({username:username});
+      if (!foundUser) throw "Wrong username!";
+      //we need the id of the person who created the job
+      let userID = foundUser._id;
+
+     
+      
+  
+      const newJobInfo = {
+        userID: userID,
+        jobTitle: jobTitle,
+        education: education,
+        yearsofExp: yearsofExp,
+        description: description,
+        company: company,
+        postDate: postDate
+
+        
+      };
+   
+  
+      const insertInfo = await jobCollection.insertOne(newJobInfo);
+      if (!insertInfo.acknowledged || !insertInfo.insertedId)
+        throw 'Could not add job';
+  
+    console.log(newJobInfo);
+      return newJobInfo;
+  
+  };
 
 
 
 
-module.exports = {getAllJobs, getJobByCompany};
+module.exports = {getAllJobs, getJobByCompany, createJob};

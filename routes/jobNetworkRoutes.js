@@ -251,4 +251,29 @@ router.route("/logout").get(async (req, res) => {
     }
   })
 
+  router
+  .route('/createjob')
+  .post(async (req, res) => {
+    
+
+    try {
+      console.log(req.body);
+      //need to validate the input still 
+      let jobTitle = req.body.jobTitle;
+      let education = req.body.education;
+      let yearsofExp = req.body.yearsofExp;
+      let description = req.body.description;
+      let company = req.body.company;
+      let postDate = req.body.postDate;
+      let username = req.body.username;
+      
+      await jobs.createJob(jobTitle, education, yearsofExp, description, company, postDate, username);
+      
+  
+     
+    } catch (e) {
+      return res.status(500).send({message: e});
+    }
+  })
+
 module.exports = router;
