@@ -1,5 +1,5 @@
 const mongoCollections = require("../MongoConnection/mongoCollection")
-const jobListings = mongoCollections.job_listings;
+const jobListings = mongoCollections.jobs;
 
 
 const getAllJobs = async () => {

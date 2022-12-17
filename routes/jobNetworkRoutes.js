@@ -3,7 +3,9 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const { checkUser } = require("../data/users");
 const { createUser } = require("../data/users");
-const { getAllJobs } = require("../data/jobListings");
+//const { getAllJobs } = require("../data/jobListings");
+const jobs = require("../data/jobListings")
+
 
 //const path = require("path");
 
@@ -177,7 +179,7 @@ router.route("/logout").get(async (req, res) => {
 
 });
 
-router
+/*router
   .route("/jobs").get(async (req,res) => {
     try {
       const jobList = await getAllJobs();
@@ -185,6 +187,21 @@ router
     } catch (e) {
       // Something went wrong with the server!
       res.status(500).send(e);
+    }
+  })*/
+
+  router
+  .route('/jobs')
+  .get(async (req, res) => {
+    //code here for GET
+    try {
+      const allJobs = await jobs.getAllJobs();
+      res.json(allJobs);
+     
+    } 
+    catch(e) {
+      res.status(500).json({error: "We did not find the jobs you were looking for"});
+
     }
   })
 
