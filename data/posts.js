@@ -27,3 +27,7 @@ const createPost = async (
       return newPostInfo;
   
   };
+
+
+  module.exports = { createPost };
+
