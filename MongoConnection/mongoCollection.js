@@ -21,6 +21,8 @@ NOTE: YOU WILL NEED TO CHANGE THE CODE BELOW TO HAVE THE COLLECTION(S) REQUIRED 
 module.exports = {
   users: getCollectionFn('users'),
   jobs: getCollectionFn("job_listings"),
-  companies: getCollectionFn("Companies")
+  companies: getCollectionFn("Companies"),
+  posts: getCollectionFn("posts")
+
  
 };
