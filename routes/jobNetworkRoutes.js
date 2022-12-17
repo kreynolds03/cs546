@@ -84,7 +84,7 @@ router
       await createUser(email, password, username, birthday, firstName, lastName, bio);
       //req.session.username = username;
   
-      res.redirect("/");
+      //res.redirect("/");
   
      
     } catch (e) {
