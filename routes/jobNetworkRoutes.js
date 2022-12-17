@@ -235,6 +235,8 @@ router.route("/logout").get(async (req, res) => {
       let about = req.body.about;
       
       await companyList.createCompany(company, about);
+      return res.sendStatus(200);
+
       
   
      
@@ -272,6 +274,8 @@ router.route("/logout").get(async (req, res) => {
       let username = req.body.username;
       
       await jobs.createJob(jobTitle, education, yearsofExp, description, company, postDate, username);
+      return res.sendStatus(200);
+
       
   
      
@@ -291,6 +295,11 @@ router.route("/logout").get(async (req, res) => {
       let content = req.body.content;
       
       await posts.createPost(title, content);
+
+      return res.sendStatus(200);
+
+
+
       
   
      
