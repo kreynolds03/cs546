@@ -211,8 +211,9 @@ router.route("/logout").get(async (req, res) => {
   .route('/:company')
   .get(async(req, res) =>{
     try{
-      const oneCompany = await companyList.getCompanyByName();
-      res.json(oneCompany);
+      let company = req.params.company;
+      const oneCompany = await companyList.getCompanyByName(company);
+      return res.json(oneCompany);
     }
     catch(e) {
       res.status(500).json({error: "Something is going wrong!"});
@@ -242,8 +243,8 @@ router.route("/logout").get(async (req, res) => {
   .route('/:company/jobs')
   .get(async (req, res) =>{
     try {
-      const oneCoJobs = await companyList.getCompanyByName(req.params.company);
-      res.status(200).json(oneCoJobs);
+      const jobsofCompany = await jobs.getJobByCompany(req.params.company);
+      res.status(200).json(jobsofCompany);
     } catch (e) {
       console.log(e);
       res.status(404).json({error: e});

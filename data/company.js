@@ -37,7 +37,8 @@ const createCompany = async (
     if (typeof company !== 'string') throw 'Company name must be a string';
     if (company.trim().length === 0)
       throw 'Company cannot be an empty string or just spaces';
-    company = company.trim();
+    //company = company.trim();
+    console.log(company);
     
   
     const companyCollection = await companyList();
