@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import Companies from "./components/Companies";
 import Jobs from "./components/Jobs";
 import ProfilePage from "./components/ProfilePage";
+import CreateJob from "./components/CreateJob"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 //const mongoCollections = require('../public');
@@ -30,6 +31,7 @@ function App() {
             <Route path ='companies' element={<Companies />}>Companies</Route>
             <Route path='/jobs' element={<Jobs />}>Jobs</Route>
             <Route path='/profile' element={<ProfilePage />}>Profile Page</Route>
+            <Route path='/createJob' element={<CreateJob />}>Profile Page</Route>
 
         </Routes>
     </Router>

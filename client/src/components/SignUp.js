@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
  
  class SignUp extends React.Component {
 
@@ -22,6 +23,7 @@ import React from 'react'
     }
 
     handleSubmit = (event) => {
+
         event.preventDefault()
 
         const data = {
@@ -37,6 +39,8 @@ import React from 'react'
         axios.post('https://127.0.0.1:3001/register', data)
         .then(res => console.log(res))
         .catch(err => console.log(err))
+
+        useNavigate('/login')
     }
 
     render(){

@@ -9,7 +9,7 @@ export default class Jobs extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('https://localhost:3001/jobs')
+        axios.get('http://127.0.0.1:3001/jobs')
         .then(response => {console.log(response.data)})
         .catch(error => {
             console.log(error);
@@ -17,12 +17,27 @@ export default class Jobs extends React.Component {
     
     }
 
+    renderJobs = () => {
+        this.state.data.map(job => {
+            return 
+            <div className='jobCard'>
+                <h3>{job.jobTitle}</h3>
+                <h4>Company: {job.company}</h4>
+                <p>Description: {job.description}</p>
+                <p>Education: {job.education}</p>
+                <p>Post Date: {job.postDate}</p>    
+            </div>
+        })
+    }
+
     render(){
         return(
             <div className='jobs'>
+                <br></br>
                 This is the Jobs COmponent
-                <button>Check Data</button>
-
+                <br></br>
+                {this.renderJobs()}
+                <a href='/createJob'>Create A Job</a>
             </div>
         )
     }
