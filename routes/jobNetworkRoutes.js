@@ -63,11 +63,7 @@ router
       let lastName = req.body.lastName;
       await createUser(email, password, birthday, firstName, lastName);
   
-      //res.redirect("/");
-
-      //res.redirect("/homepage");
-
-      return res.sendStatus(200);
+      res.redirect("/");
   
      
     } catch (e) {
