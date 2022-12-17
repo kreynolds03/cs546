@@ -297,15 +297,37 @@ router.route("/logout").get(async (req, res) => {
       await posts.createPost(title, content);
 
       return res.sendStatus(200);
-
-
-
-      
-  
      
     } catch (e) {
       return res.status(500).send({message: e});
     }
   })
+
+
+  router.delete('/:id', async (req, res) => {
+    //code here for DELETE
+    const movieData = req.body;
+    try {
+      req.params.id = helper.checkId(req.params.id, 'Id URL Param');
+     
+    } catch (e) {
+      return res.status(400).json({error: e});
+    }
+    try {
+      await movieData.getMovieById(req.params.id);
+    } catch (e) {
+      return res.status(404).json({error: 'Post not found'});
+    }
+    try {
+      await movieData.removeMovie(req.params.id);
+      res.status(200).json({deleted: true});
+    } catch (e) {
+      res.status(500).json({error: e});
+    }
+
+
+  })
+
+
 
 module.exports = router;

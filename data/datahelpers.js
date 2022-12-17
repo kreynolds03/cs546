@@ -45,6 +45,16 @@ function isValidDate(dateString)
 
 
 
+function checkId(id, varName) {
+    if (!id) throw `You must provide a ${varName}`;
+    if (typeof id !== 'string') throw `${varName} must be a string`;
+    id = id.trim();
+    if (id.length === 0)
+      throw `${varName} cannot be an empty string or just spaces`;
+    if (!ObjectId.isValid(id)) throw `${varName} invalid object ID`;
+    return id;
+  };
 
 
-module.exports = { isAlpha, isValidDate };
+
+module.exports = { isAlpha, isValidDate, checkId };

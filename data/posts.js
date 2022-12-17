@@ -1,5 +1,9 @@
 const mongoCollections = require("../MongoConnection/mongoCollection")
 const postList = mongoCollections.posts;
+const helpers = require("./datahelpers");
+const {ObjectId} = require('mongodb');
+
+
 
 const createPost = async (
     title,
@@ -28,6 +32,24 @@ const createPost = async (
   
   };
 
+  const getPostById = async (postId) => {
+    //console.log(movieId);
+    helpers.checkId(postId);
+    const postCollection = await postList();
+    return await postCollection.findOne({_id: ObjectId(postId)})
+  
+  };
 
-  module.exports = { createPost };
+  const removePost = async (movieId) => {
+    movieId = helper.checkId(movieId);
+    const movieCollection = await movies();
+  
+    return await movieCollection.deleteOne({_id: ObjectId(movieId)});
+  };
+  
+
+
+
+
+  module.exports = { createPost, getPostById, removePost };
 
