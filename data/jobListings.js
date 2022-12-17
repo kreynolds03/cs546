@@ -10,4 +10,4 @@ const getAllJobs = async () => {
     return jobList;
   };
 
-module.exports = getAllJobs;
+module.exports = {getAllJobs};
