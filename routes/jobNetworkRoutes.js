@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const { checkUser } = require("../data/users");
 const { createUser } = require("../data/users");
 //const { getAllJobs } = require("../data/jobListings");
-const jobs = require("../data/jobListings")
+const jobs = require("../data/jobListings");
+const companyList = require("../data/company");
 
 
 //const path = require("path");
@@ -202,6 +203,50 @@ router.route("/logout").get(async (req, res) => {
     catch(e) {
       res.status(500).json({error: "We did not find the jobs you were looking for"});
 
+    }
+  })
+
+
+  router
+  .route('/:company')
+  .get(async(req, res) =>{
+    try{
+      const oneCompany = await companyList.getCompanyByName();
+      res.json(oneCompany);
+    }
+    catch(e) {
+      res.status(500).json({error: "Something is going wrong!"});
+    }
+  })
+
+  router
+  .route('/createcompany')
+  .post(async (req, res) => {
+    
+
+    try {
+      console.log(req.body);
+      let company = req.body.company;
+      let about = req.body.about;
+      
+      await companyList.createCompany(company, about);
+      
+  
+     
+    } catch (e) {
+      return res.status(500).send({message: e});
+    }
+  })
+
+  router
+  .route('/:company/jobs')
+  .get(async (req, res) =>{
+    try {
+      const oneCoJobs = await companyList.getCompanyByName(req.params.company);
+      res.status(200).json(oneCoJobs);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
     }
   })
 
