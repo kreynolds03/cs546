@@ -1,0 +1,190 @@
+/*
+You are NOT required to use CSS for this lab (but you can if you want to).
+*/
+
+header{
+
+    border-bottom: 1px solid #afafaf;
+
+}
+
+footer{
+
+    border-top: 1px solid #afafaf;
+    background-color: beige;
+
+}
+h1{
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+h2{
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+
+}
+
+#local{
+
+    background-color: beige;
+
+}
+
+#root{
+
+    background-color: beige;
+
+}
+
+img{
+
+    width: 150px;
+    
+}
+
+.left{
+
+    float: left;
+	width: 250px;
+	height: 100px;
+
+}
+
+.right{
+
+    float: right;
+	width: 100px;
+	height: 100px;
+
+}
+
+.center{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    
+}
+
+#headerColor{
+
+    background-color: blue;
+
+}
+
+.centerr{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+
+}
+
+.footerClass p{
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+/*
+body {
+    background: #fefefe;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: 15pt;
+  
+}
+  
+header {
+    border-bottom: 1px solid #afafaf;
+    text-align: center;
+  
+}
+  
+footer {
+    border-top: 1px solid #afafaf;
+    text-align: center;
+    font-size: 15pt;
+  
+}
+  
+form {
+    text-align: center;
+  
+}
+  
+input[type=text] {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border: 0.5px solid #a0a0a0;
+    font-size: 15px;
+  
+}
+  
+input[type=text]:hover {
+    border-radius: 4px;
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+    box-shadow: 0px 0px 10px grey;
+  
+}
+  
+input[type=text]:focus{
+    border-color:#4d90fe;
+    box-shadow: 0px 0px 10px grey;
+  
+}
+  
+button {
+    border-radius: 2px;
+    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    color: #757575;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    padding: 0 16px;
+    height:36px;
+  
+}
+  
+button:hover {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    background: #f8f8f8;
+    border: 1px solid #c6c6c6;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    color: #222;
+  
+}
+  
+h1{
+    color: #333;
+    margin-bottom: 5px;
+
+}
+  
+h1 {
+    font-size: 2rem;
+  
+}
+  
+p {
+    font-size: 1.25rem;
+    line-height: 2;
+  
+}
+
+*/

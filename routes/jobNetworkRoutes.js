@@ -2,8 +2,11 @@ const express = require("express");
 
 const bcrypt = require("bcrypt");
 const { checkUser } = require("../data/users");
-
 const { createUser } = require("../data/users");
+//const { getAllJobs } = require("../data/jobListings");
+const jobs = require("../data/jobListings");
+const companyList = require("../data/company");
+
 
 //const path = require("path");
 
@@ -67,15 +70,17 @@ router
 
     try {
       console.log(req.body);
-      let username = req.body.username;
+      let email = req.body.email;
       let password = req.body.password;
+      let username = req.body.username;
       let birthday = req.body.birthday;
       let firstName = req.body.firstName;
       let lastName = req.body.lastName;
-      await createUser(username, password, birthday, firstName, lastName);
+      let bio = req.body.bio
+      await createUser(email, password, username, birthday, firstName, lastName, bio);
       //req.session.username = username;
   
-      //res.redirect("/");
+      res.redirect("/");
   
      
     } catch (e) {
@@ -177,7 +182,100 @@ router.route("/logout").get(async (req, res) => {
 
 });
 
-router
-  .route("/joblistings")
+/*router
+  .route("/jobs").get(async (req,res) => {
+    try {
+      const jobList = await getAllJobs();
+      res.json(jobList);
+    } catch (e) {
+      // Something went wrong with the server!
+      res.status(500).send(e);
+    }
+  })*/
+
+  router
+  .route('/jobs')
+  .get(async (req, res) => {
+    //code here for GET
+    try {
+      const allJobs = await jobs.getAllJobs();
+      res.json(allJobs);
+     
+    } 
+    catch(e) {
+      res.status(500).json({error: "We did not find the jobs you were looking for"});
+
+    }
+  })
+
+
+  router
+  .route('/:company')
+  .get(async(req, res) =>{
+    try{
+      let company = req.params.company;
+      const oneCompany = await companyList.getCompanyByName(company);
+      return res.json(oneCompany);
+    }
+    catch(e) {
+      res.status(500).json({error: "Something is going wrong!"});
+    }
+  })
+
+  router
+  .route('/createcompany')
+  .post(async (req, res) => {
+    
+
+    try {
+      console.log(req.body);
+      let company = req.body.company;
+      let about = req.body.about;
+      
+      await companyList.createCompany(company, about);
+      
+  
+     
+    } catch (e) {
+      return res.status(500).send({message: e});
+    }
+  })
+
+  router
+  .route('/:company/jobs')
+  .get(async (req, res) =>{
+    try {
+      const jobsofCompany = await jobs.getJobByCompany(req.params.company);
+      res.status(200).json(jobsofCompany);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
+    }
+  })
+
+  router
+  .route('/createjob')
+  .post(async (req, res) => {
+    
+
+    try {
+      console.log(req.body);
+      //need to validate the input still 
+      let jobTitle = req.body.jobTitle;
+      let education = req.body.education;
+      let yearsofExp = req.body.yearsofExp;
+      let description = req.body.description;
+      let company = req.body.company;
+      let postDate = req.body.postDate;
+      let username = req.body.username;
+      
+      await jobs.createJob(jobTitle, education, yearsofExp, description, company, postDate, username);
+      
+  
+     
+    } catch (e) {
+      return res.status(500).send({message: e});
+    }
+  })
 
 module.exports = router;
