@@ -7,8 +7,6 @@ const { createUser } = require("../data/users");
 const jobs = require("../data/jobListings");
 const companyList = require("../data/company");
 const posts =  require("../data/posts");
-const helper =  require("../data/datahelpers");
-
 
 
 
@@ -275,21 +273,21 @@ router.route("/logout").get(async (req, res) => {
 
 
   router.delete('/:id', async (req, res) => {
-    //code here for deleting a post
+    //code here for DELETE
+    const movieData = req.body;
     try {
       req.params.id = helper.checkId(req.params.id, 'Id URL Param');
      
     } catch (e) {
-      console.log({error: e});
       return res.status(400).json({error: e});
     }
     try {
-      await posts.getPostById(req.params.id);
+      await movieData.getMovieById(req.params.id);
     } catch (e) {
       return res.status(404).json({error: 'Post not found'});
     }
     try {
-      await posts.removePost(req.params.id);
+      await movieData.removeMovie(req.params.id);
       res.status(200).json({deleted: true});
     } catch (e) {
       res.status(500).json({error: e});
