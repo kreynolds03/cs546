@@ -7,16 +7,18 @@ const createCompany = async (
   ) => { 
   
       const companyCollection = await companyList();
+
+      let companyName = company.toLowerCase();
       
   
       const newCompanyInfo = {
-        company: company,
+        company: companyName,
         about: about,
         people: [],
         jobs: []
         
       };
-    const foundCompany = await companyCollection.findOne({company});
+    const foundCompany = await companyCollection.findOne({companyName});
     console.log("foundCompany: ", foundCompany);
     if(foundCompany) {
     throw "Sorry. This Company exists. Please enter a distinct name.";

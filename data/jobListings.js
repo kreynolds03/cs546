@@ -42,6 +42,18 @@ const getAllJobs = async () => {
       if (!foundUser) throw "Wrong username!";
       //we need the id of the person who created the job
       let userID = foundUser._id;
+      const companyCollection = await companyList();
+
+      let companyName = company.toLowerCase();
+
+      const foundCompany = await companyCollection.findOne({companyName});
+      console.log("foundCompany: ", foundCompany);
+      if(foundCompany) {
+      throw "Sorry. This Company exists. Please enter a distinct name.";
+    }
+
+
+      console.log(userID);
 
      
       

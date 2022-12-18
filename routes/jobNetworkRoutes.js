@@ -48,25 +48,6 @@ router.route("/").get(async (req, res) => {
 
 router
   .route("/register")
-  /*.get(async (req, res) => {
-    //code here for GET
-
-
-    if(!req.session.username) {
-
-      console.log(new Date().toUTCString() + ": GET /register (Non-Authenticated User)");
-    }
-  
-    else {
-  
-      console.log(new Date().toUTCString() + ": GET /register (Authenticated User)");
-  
-  
-    }
-
-   
-
-  })*/
   .post(async (req, res) => {
     //code here for POST
 
@@ -78,31 +59,20 @@ router
       let birthday = req.body.birthday;
       let firstName = req.body.firstName;
       let lastName = req.body.lastName;
-      let bio = req.body.bio
-      await createUser(email, password, username, birthday, firstName, lastName, bio);
+      await createUser(email, password, username, birthday, firstName, lastName);
       //req.session.username = username;
   
-      res.redirect("/");
+      //res.redirect("/");
+      return res.sendStatus(200);
+
   
      
     } catch (e) {
-      return res.status(500).send({message: e});
-    }
-
-    if(!req.session?.username) {
-
-      console.log(new Date().toUTCString() + ": POST /register (Non-Authenticated User)");
-      return res.sendStatus(200);
+      res.status(500).json({error: e});
+      //return res.sendStatus(500);
 
     }
-  
-    else {
-  
-      console.log(new Date().toUTCString() + ": POST /register (Authenticated User)");
-      return res.sendStatus(200);
-  
-  
-    }
+
   });
 
 router.route("/login").post(async (req, res) => {
@@ -220,7 +190,7 @@ router.route("/logout").get(async (req, res) => {
       return res.json(oneCompany);
     }
     catch(e) {
-      res.status(500).json({error: "Something is going wrong!"});
+      res.status(500).json({error: e});
     }
   })
 

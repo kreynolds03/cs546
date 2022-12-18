@@ -55,6 +55,31 @@ function checkId(id, varName) {
     return id;
   };
 
+  function checkEmail(email) {
+
+    if(!email.includes("@")) {
+
+       // throw "Please enter a valid email address!";
+
+       return false;
+        
+    }
+
+    let emailArr = email.split("@");
+    if(emailArr[1] != "stevens.edu") {
+
+        //throw "Invalid email. You must use your Stevens email!";
+
+        return false;
+
+    }
 
 
-module.exports = { isAlpha, isValidDate, checkId };
+ 
+
+
+  }
+
+
+
+module.exports = { isAlpha, isValidDate, checkId, checkEmail };

@@ -11,8 +11,7 @@ const createUser = async (
   username,
   birthday, 
   firstName,
-  lastName,
-  bio
+  lastName
 ) => { 
 
   //console.log(1);
@@ -53,6 +52,10 @@ const createUser = async (
 
   //console.log(6);
 
+  if(helpers.checkEmail(email) == false) {
+    throw "Bad email";
+  }
+
 
   username = username.toLowerCase();
 
@@ -80,7 +83,7 @@ const createUser = async (
     username: username,
     birthday: birthday,
     firstName: firstName,
-    bio: bio,
+    bio: null,
     logo: null,
     jobs: [],
     posts: [],
