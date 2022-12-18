@@ -19,6 +19,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
  // const [data, setData] = React.useState(null);
+ const [token, setToken] = React.useState(null);
+
+
+ if(!token){
+    return <LoginForm setToken = {setToken} />
+ }
+
  return(
  <div>
     <Router>
