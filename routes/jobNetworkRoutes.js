@@ -13,6 +13,7 @@ const users = require("../data/users");
 const comments = require("../data/comments");
 const likes = require("../data/likes");
 const fileList = require("../data/files");
+const {encode, decode} = require("../utils/jwt")
 
 
 
@@ -26,6 +27,10 @@ const router = express.Router();
 
 
 function authMiddleware(req, res, next){
+  const {authorization} = req.headers;
+  if(!authorization) {
+    return res.status(401).json({message: "Please provide an authentication token"});
+  }
   if(!req.session.username) {
     res.status(403).send({message: e});
   } else {
@@ -89,30 +94,13 @@ router.route("/login").post(async (req, res) => {
     let username = req.body.username; //might change depending on how we do our input in react
     let password = req.body.password;
     await checkUser(username, password);
-    //req.session.username = username;
-
-    //res.redirect("/protected");
-
+    return res.status(200).json({token: await encode(username)});
    
   } catch (e) {
+    console.log(e);
     res.status(500).send({message: e});
   }
 
-  if(!req.session?.username) {
-
-    console.log(new Date().toUTCString() + ": POST /login (Non-Authenticated User)");
-    return res.sendStatus(200);
-
-  }
-
-  else {
-
-    console.log(new Date().toUTCString() + ": POST /login (Authenticated User)");
-    return res.sendStatus(200);
-
-
-
-  }
 });
 
 router.route("/protected").get(authMiddleware, async (req, res) => {
