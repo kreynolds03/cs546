@@ -34,8 +34,8 @@ export default class CreateJob extends React.Component{
         }
 
         axios.post('http://127.0.0.1:3001/createJob', data)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .then(res => alert('You have created a '))
+        .catch(err => alert('You have recieved the following error: ' + err))
     }
 
 
@@ -60,7 +60,7 @@ export default class CreateJob extends React.Component{
                 <input type="text" id="company" name="company" onChange={this.eventHandler}></input>
                 <br></br>
 
-                <button type="submit" onClick={this.handleSubmit}>Create Profile</button>
+                <button type="submit" onClick={this.handleSubmit}>Create Job</button>
             </form>
         </div>)
     }
