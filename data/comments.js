@@ -30,6 +30,7 @@ const addComment = async (username, content, title) =>{
     {
         userID: userID,
         postID: postID,
+        username: nameOfUser,
         content: content
     };
 
