@@ -8,6 +8,8 @@ import Jobs from "./components/Jobs";
 import ProfilePage from "./components/ProfilePage";
 import CreateJob from "./components/CreateJob"
 import CreateCompany from "./components/CreateCompany"
+import HomePage from "./components/HomePage";
+import EditProfile from "./components/EditProfile";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 //const mongoCollections = require('../public');
@@ -17,16 +19,28 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 //const users = mongoCollections.users; // Not using this here, using axios to pull from routes
 
+
+
+function setUser(user){
+    sessionStorage.setItem('token', JSON.stringify(user))
+}
+
+function getUser(){
+    const tokenString = sessionStorage.getItem('token');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+}
+
+
 function App() {
- // const [data, setData] = React.useState(null);
- // const [token, setToken] = React.useState(null);
 
-/*
- if(!token){
-    return <LoginForm setToken = {setToken} />
- }
 
- */
+const user = getUser();
+
+//  if(!user){
+//     return <LoginForm setUser = {setUser} />
+//  }
+
 
  return(
  <div>
@@ -38,9 +52,12 @@ function App() {
             <Route path ='/login' element={<LoginForm />}></Route>
             <Route path ='/signup' element={<SignUp />}>Sign Up</Route>
             <Route path='/jobs' element={<Jobs />}>Jobs</Route>
-            <Route path='/profile' element={<ProfilePage />}>Profile Page</Route>
+            <Route path='/profile' element={<ProfilePage user = {user}/>}>Profile Page</Route>
             <Route path='/createJob' element={<CreateJob />}>Create Job</Route>
             <Route path='/createCompany' element={<CreateCompany />}>Create Company</Route>
+            <Route path ='/' element={<HomePage />}></Route>
+            <Route path ='/editProfile' element={<EditProfile user={user}/>}></Route>
+
 
         </Routes>
     </Router>

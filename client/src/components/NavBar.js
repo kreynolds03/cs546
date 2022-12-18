@@ -10,7 +10,7 @@ export default function NavBar(){
             <br></br>
             <a href='/signup'>Sign Up</a>
             <br></br>
-            <a href='/companies'>Companies</a>
+            <a href='/'>Home</a>
             <br></br>
             <a href='/jobs'>Jobs</a>
             <br></br>
