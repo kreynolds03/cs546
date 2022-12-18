@@ -43,7 +43,9 @@ async function authMiddleware(req, res, next){
     next();
 
 
-  } catch {
+  } catch(e) {
+
+    return res.status(401).json({message: e})
 
   }
   
@@ -113,6 +115,11 @@ router.route("/login").post(async (req, res) => {
   }
 
 });
+
+router.route("/verify").get(async (req, res) => {
+  
+
+})
 
 router.route("/protected").get(authMiddleware, async (req, res) => {
   //code here for GET
