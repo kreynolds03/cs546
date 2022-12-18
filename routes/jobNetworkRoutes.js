@@ -116,8 +116,21 @@ router.route("/login").post(async (req, res) => {
 
 });
 
-router.route("/verify").get(async (req, res) => {
-  
+router.route("/verify").post(async (req, res) => {
+  const {token} = req.body;
+
+  if(!token) {
+    return res.status(400).json({message : "Missing token!"});
+  }
+
+  const tokenIsValid = await validateToken(token);
+
+  if(!tokenIsValid) {
+    return res.status(403).json({message : "Token is not valid!"}); 
+  }
+
+  return res.status(200).json({message: "Token is valid"});
+
 
 })
 
