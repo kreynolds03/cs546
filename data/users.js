@@ -90,7 +90,8 @@ const createUser = async (
     comments: [],
     followedUsers: [],
     likedPosts: [],
-    jobListings: []
+    jobListings: [],
+    skills: []
 
   };
 
@@ -156,9 +157,40 @@ const checkUser = async (username, password) => {
 
 };
 
+const updateUser = async (username,jobs,bio,education,skills) => {
+
+
+  let nameOfUser = username.toLowerCase();
+
+
+  const updates = 
+  {
+    jobs: jobs,
+    bio: bio,
+    education: education,
+    skills: skills,
+    username: nameOfUser
+  }
+
+  const userCollection = await users();
+
+  const updatedUserProfile = await userCollection.updateMany(
+    {username:nameOfUser},
+    {$set: updates}
+  );
+
+
+  return updates;
+
+
+
+
+}
+
 module.exports = { 
   createUser,
-  checkUser
+  checkUser,
+  updateUser
 };
 
 
