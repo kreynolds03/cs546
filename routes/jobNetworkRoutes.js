@@ -371,6 +371,18 @@ router.route("/logout").get(async (req, res) => {
 
   })
 
+  router
+  .route('/:username/activity')
+  .get(async (req, res) =>{
+    try {
+      const jobsofCompany = await jobs.getJobByCompany(req.params.company);
+      res.status(200).json(jobsofCompany);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
+    }
+  })
+
 
   
 
