@@ -344,7 +344,7 @@ router.route("/logout").get(async (req, res) => {
      const username = req.body.username;
     const title = req.body.title;
 
-    await likes.addLike(username,content,title);
+    await likes.addLike(username,title);
     return res.sendStatus(200);
    } catch(e){
     return res.status(500).send({message:e});

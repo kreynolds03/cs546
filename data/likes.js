@@ -33,7 +33,7 @@ const addLike = async (username, title) =>{
     };
 
 
-    //insert into comment collection
+    //insert into like collection
     const insertInfo = await likeCollection.insertOne(newLike);
     if (!insertInfo.acknowledged || !insertInfo.insertedId)
       throw 'Could not add ';

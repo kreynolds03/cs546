@@ -184,14 +184,41 @@ const updateUser = async (username,jobs,bio,education,skills) => {
   return updates;
 
 
+}
+
+const updateFollowers = async(username1, username2) =>{
+  const userCollection = await users();
+
+  let nameOfUser = username1.toLowerCase();
+  let followedUser = username2.toLowerCase();
+
+  const findMe = await userCollection.findOne({username: nameOfUser});
+
+  console.log(findMe);
 
 
+
+
+  const foundUser = await userCollection.findOne({username: followedUser});
+
+  //console.log(foundUser);
+
+  if(!foundUser) {
+    throw "User does not exist!";
+  }
+
+
+
+  const updatedFollowing = await userCollection.updateOne({username:nameOfUser}, {$push:{followedUsers: foundUser}});
+  console.log(updatedFollowing);
+  return true;
 }
 
 module.exports = { 
   createUser,
   checkUser,
-  updateUser
+  updateUser,
+  updateFollowers
 };
 
 
