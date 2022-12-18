@@ -239,12 +239,32 @@ const getAllPostsByUser = async(username) => {
 
 }
 
+
+const showUserProfile = async(username) => {
+
+  let nameOfUser = username.toLowerCase();
+
+
+  const userCollection = await users();
+
+
+  const findMe = await userCollection.findOne({username: nameOfUser});
+
+
+  return findMe;
+
+
+}
+
+
+
 module.exports = { 
   createUser,
   checkUser,
   updateUser,
   updateFollowers,
-  getAllPostsByUser
+  getAllPostsByUser,
+  showUserProfile
 };
 
 
