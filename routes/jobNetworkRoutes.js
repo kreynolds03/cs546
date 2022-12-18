@@ -3,6 +3,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const { checkUser } = require("../data/users");
 const { createUser } = require("../data/users");
+const { updateUser } = require("../data/users");
+
 //const { getAllJobs } = require("../data/jobListings");
 const jobs = require("../data/jobListings");
 const companyList = require("../data/company");
@@ -333,6 +335,29 @@ router.route("/logout").get(async (req, res) => {
     return res.status(500).send({message:e});
    }
   })
+
+  router
+  .route("/editprofile")
+  .put(async (req, res) => {
+
+    const updatedData = req.body;
+    let username = updatedData.username
+    let jobs = updatedData.jobs;
+    let bio = updatedData.bio;
+    let education = updatedData.education;
+    let skills = updatedData.skills;
+
+    try {
+      const updatedProfile = await updateUser(username, jobs, bio, education, skills);
+      res.json(updatedProfile);
+    } catch (e) {
+      res.status(500).json({error: e});
+    }
+
+  })
+
+
+  
 
 
 

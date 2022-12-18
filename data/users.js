@@ -91,7 +91,8 @@ const createUser = async (
     comments: [],
     followedUsers: [],
     likedPosts: [],
-    jobListings: []
+    jobListings: [],
+    skills: []
 
   };
 
@@ -157,26 +158,9 @@ const checkUser = async (username, password) => {
 
 };
 
-
-const updateFollowers = async(username1, username2) =>{
-  const userCollection = await users();
-
-  let nameOfUser = username1.toLowerCase();
-
-  const foundUser = await userCollection.findOne({username: username2});
-
-
-  const updatedFollowing = await userCollection.updateOne({username:nameOfUser}, {$push:{people: foundUser}});
-  console.log(updatedFollowing);
-  return true;
-}
-
-
-
 module.exports = { 
   createUser,
-  checkUser,
-  updateFollowers
+  checkUser
 };
 
 
