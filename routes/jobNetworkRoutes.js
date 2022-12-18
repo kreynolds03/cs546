@@ -11,6 +11,7 @@ const companyList = require("../data/company");
 const posts =  require("../data/posts");
 const users = require("../data/users");
 const comments = require("../data/comments");
+const likes = require("../data/likes");
 
 
 
@@ -330,6 +331,20 @@ router.route("/logout").get(async (req, res) => {
     const title = req.body.title;
 
     await comments.addComment(username,content,title);
+    return res.sendStatus(200);
+   } catch(e){
+    return res.status(500).send({message:e});
+   }
+  })
+
+  router
+  .route('/addlike')
+  .post(async (req, res) =>{
+   try{
+     const username = req.body.username;
+    const title = req.body.title;
+
+    await likes.addLike(username,content,title);
     return res.sendStatus(200);
    } catch(e){
     return res.status(500).send({message:e});
