@@ -2,26 +2,25 @@ const mongoCollections = require("../MongoConnection/mongoCollection")
 const postList = mongoCollections.posts;
 const helpers = require("./datahelpers");
 const {ObjectId} = require('mongodb');
+const users = mongoCollections.users;
 
 
 
 const createPost = async (
     username,
     title,
-    content,
-    image, 
+    content 
     
   ) => { 
   
       const postCollection = await postList();
       username = username.toLowerCase();
-      
+      const userCollection = await users();
   
       const newPostInfo = {
         username: username,
         title: title,
         content: content,
-        image: image,
         comments: [],
         likes: []
       };
@@ -30,6 +29,9 @@ const createPost = async (
       const insertInfo = await postCollection.insertOne(newPostInfo);
       if (!insertInfo.acknowledged || !insertInfo.insertedId)
         throw 'Could not add post';
+
+      const updatedUser = await userCollection.updateOne({username:username}, {$push:{posts:newPostInfo}});
+
   
     console.log(newPostInfo);
       return newPostInfo;

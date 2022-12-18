@@ -2,7 +2,9 @@ const mongoCollections = require("../MongoConnection/mongoCollection")
 const users = mongoCollections.users;
 const bcrypt = require("bcrypt");
 const helpers = require("./datahelpers");
+const { post } = require("../routes/jobNetworkRoutes");
 const companyList = mongoCollections.companies;
+const postList = mongoCollections.posts;
 
 console.log(mongoCollections);
 
@@ -216,7 +218,23 @@ const updateFollowers = async(username1, username2) =>{
 
 const getAllPostsByUser = async(username) => {
 
+    let nameOfUser = username.toLowerCase();
+
     const userCollection = await users();
+
+
+    const findMe = await userCollection.findOne({username: nameOfUser});
+
+    console.log(findMe);
+
+
+    const postList = findMe.posts;
+
+ 
+
+    console.log(postList);
+
+    return postList;
 
 
 }
@@ -225,7 +243,8 @@ module.exports = {
   createUser,
   checkUser,
   updateUser,
-  updateFollowers
+  updateFollowers,
+  getAllPostsByUser
 };
 
 

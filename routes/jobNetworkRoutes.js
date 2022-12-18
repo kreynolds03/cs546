@@ -269,8 +269,9 @@ router.route("/logout").get(async (req, res) => {
       console.log(req.body);
       let title = req.body.title;
       let content = req.body.content;
+      let username = req.body.username;
       
-      await posts.createPost(title, content);
+      await posts.createPost(username, title, content);
 
       return res.sendStatus(200);
      
@@ -375,8 +376,10 @@ router.route("/logout").get(async (req, res) => {
   .route('/:username/activity')
   .get(async (req, res) =>{
     try {
-      const jobsofCompany = await jobs.getJobByCompany(req.params.company);
-      res.status(200).json(jobsofCompany);
+      //console.log(req.params.username);
+      const postsofUser = await users.getAllPostsByUser(req.params.username);
+      console.log(req.params.username);
+      res.status(200).json(postsofUser);
     } catch (e) {
       console.log(e);
       res.status(404).json({error: e});
