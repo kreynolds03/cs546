@@ -39,6 +39,8 @@ export default class Jobs extends React.Component {
                 <br></br>
                 {this.renderJobs()}
                 <a href='/createJob'>Create A Job</a>
+                <br></br>
+                <a href='/createCompany'>Create A Company</a>
             </div>
         )
     }
