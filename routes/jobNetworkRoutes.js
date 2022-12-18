@@ -7,6 +7,8 @@ const { createUser } = require("../data/users");
 const jobs = require("../data/jobListings");
 const companyList = require("../data/company");
 const posts =  require("../data/posts");
+const users = require("../data/users");
+const comments = require("../data/comments");
 
 
 
@@ -297,6 +299,39 @@ router.route("/logout").get(async (req, res) => {
     }
 
 
+  })
+
+  // follow route [Update Route]
+  // - comment route [Post Route]
+  // - like route [Post Route]
+
+  router.put('/follow', async (req, res) =>{
+    try{
+    const username1 = req.body.username1;
+    const username2 = req.body.username2;
+
+    await users.updateFollowers(username1, username2);
+    return res.sendStatus(200);
+  }catch(e){
+      return res.status(500).send({message: e});
+    }
+
+
+  })
+
+  router
+  .route('/createcomment')
+  .post(async (req, res) =>{
+   try{
+     const username = req.body.username;
+    const content = req.body.content;
+    const title = req.body.title;
+
+    await comments.addComment(username,content,title);
+    return res.sendStatus(200);
+   } catch(e){
+    return res.status(500).send({message:e});
+   }
   })
 
 

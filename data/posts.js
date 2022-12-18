@@ -6,15 +6,19 @@ const {ObjectId} = require('mongodb');
 
 
 const createPost = async (
+    username,
     title,
     content,
-    image
+    image, 
+    
   ) => { 
   
       const postCollection = await postList();
+      username = username.toLowerCase();
       
   
       const newPostInfo = {
+        username: username,
         title: title,
         content: content,
         image: image,

@@ -22,7 +22,9 @@ module.exports = {
   users: getCollectionFn('users'),
   jobs: getCollectionFn("job_listings"),
   companies: getCollectionFn("Companies"),
-  posts: getCollectionFn("posts")
+  posts: getCollectionFn("posts"),
+  comments: getCollectionFn("comments"),
+  likes: getCollectionFn("likes")
 
  
 };
