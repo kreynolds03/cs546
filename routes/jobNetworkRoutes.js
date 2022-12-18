@@ -427,6 +427,23 @@ router.route("/logout").get(async (req, res) => {
 
   })
 
+
+  router
+  .route('/profile/:username')
+  .get(async (req, res) =>{
+    try {
+      //console.log(req.params.username);
+      const userProfile = await users.showUserProfile(req.params.username);
+      //console.log(req.params._id);
+      res.status(200).json(userProfile);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
+    }
+  })
+
+  
+
   
 
 
