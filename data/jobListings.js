@@ -3,7 +3,8 @@ const jobListings = mongoCollections.jobs;
 const companyList = mongoCollections.companies;
 const users = mongoCollections.users;
 const {ObjectId} = require('mongodb');
-const { jobs } = require("../MongoConnection/mongoCollection");
+//const { jobs } = require("../MongoConnection/mongoCollection");
+const helper = require("./datahelpers")
 
 
 
@@ -166,6 +167,23 @@ const getAllJobs = async () => {
   };
 
 
+  const getJobById = async (jobId) => {
+
+    helper.checkId(jobId);
+    const jobCollection = await jobListings();
+    const jobReq =  await jobCollection.findOne({_id: ObjectId(jobId)})
+
+    //let jobReqNum = jobReq._id.toString(); - This will happen 
 
 
-module.exports = {getAllJobs, getJobByCompany, createJob};
+    return jobReq;
+
+
+  }
+
+
+
+
+
+
+module.exports = {getAllJobs, getJobByCompany, createJob, getJobById};

@@ -388,6 +388,21 @@ router.route("/logout").get(async (req, res) => {
 
 
   
+  router
+  .route('/job/:_id')
+  .get(async (req, res) =>{
+    try {
+      //console.log(req.params.username);
+      const jobReq = await jobs.getJobById(req.params._id);
+      //console.log(req.params._id);
+      res.status(200).json(jobReq);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
+    }
+  })
+
+  
 
 
 

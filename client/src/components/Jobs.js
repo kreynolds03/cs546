@@ -16,7 +16,7 @@ export default class Jobs extends React.Component {
         })
     
     }
-
+// Make Job Id as a link 
     renderJobs = () => {
         this.state.data.map(job => {
             return 
@@ -24,6 +24,7 @@ export default class Jobs extends React.Component {
                 <h3>{job.jobTitle}</h3>
                 <h4>Company: {job.company}</h4>
                 <p>Description: {job.description}</p>
+                <p>Job ID: {job._id.toString()}</p>
                 <p>Education: {job.education}</p>
                 <p>Post Date: {job.postDate}</p>    
             </div>
