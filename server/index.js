@@ -14,7 +14,7 @@ app.listen(3001, () => {
   console.log("Server is up");
   console.log("http://localhost:3000")
 });
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '16mb'}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', jobNetworkRoutes);
 

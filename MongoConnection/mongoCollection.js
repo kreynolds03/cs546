@@ -25,7 +25,8 @@ module.exports = {
   posts: getCollectionFn("posts"),
   comments: getCollectionFn("comments"),
   likes: getCollectionFn("likes"),
-  jobhistory: getCollectionFn("jobs")
+  jobhistory: getCollectionFn("jobs"),
+  files: getCollectionFn("files")
 
  
 };

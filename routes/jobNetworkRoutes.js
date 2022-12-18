@@ -12,6 +12,8 @@ const posts =  require("../data/posts");
 const users = require("../data/users");
 const comments = require("../data/comments");
 const likes = require("../data/likes");
+const fileList = require("../data/files");
+
 
 
 
@@ -468,6 +470,31 @@ router.route("/logout").get(async (req, res) => {
     }
   })
 
+
+  router
+  .route('/uploadresume')
+  .post(async (req, res) =>{
+
+    const updatedData = req.body;
+
+    let filename = updatedData.filename;
+    let username = updatedData.username;
+    let fileStream = updatedData.filestream;
+    let jobId = updatedData.jobId;
+
+    try {
+      //console.log(req.params.username);
+      const userResume = await fileList.uploadFile(filename, username, fileStream);
+      //console.log(req.params._id);
+      res.status(200).json(userResume);
+    } catch (e) {
+      console.log(e);
+      res.status(404).json({error: e});
+    }
+
+
+
+  })
   
 
   
