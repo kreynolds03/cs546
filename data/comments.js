@@ -1,4 +1,3 @@
-const { comments } = require("../MongoConnection/mongoCollection");
 const mongoCollections = require("../MongoConnection/mongoCollection")
 const comments = mongoCollections.comments;
 const posts = mongoCollections.posts;
