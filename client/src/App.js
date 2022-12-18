@@ -9,6 +9,7 @@ import ProfilePage from "./components/ProfilePage";
 import CreateJob from "./components/CreateJob"
 import CreateCompany from "./components/CreateCompany"
 import HomePage from "./components/HomePage";
+import EditProfile from "./components/EditProfile";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 //const mongoCollections = require('../public');
@@ -36,9 +37,9 @@ function App() {
 
 const user = getUser();
 
- if(!user){
-    return <LoginForm setUser = {setUser} />
- }
+//  if(!user){
+//     return <LoginForm setUser = {setUser} />
+//  }
 
 
  return(
@@ -51,10 +52,11 @@ const user = getUser();
             <Route path ='/login' element={<LoginForm />}></Route>
             <Route path ='/signup' element={<SignUp />}>Sign Up</Route>
             <Route path='/jobs' element={<Jobs />}>Jobs</Route>
-            <Route path='/profile' element={<ProfilePage />}>Profile Page</Route>
+            <Route path='/profile' element={<ProfilePage user = {user}/>}>Profile Page</Route>
             <Route path='/createJob' element={<CreateJob />}>Create Job</Route>
             <Route path='/createCompany' element={<CreateCompany />}>Create Company</Route>
             <Route path ='/' element={<HomePage />}></Route>
+            <Route path ='/editProfile' element={<EditProfile user={user}/>}></Route>
 
 
         </Routes>
