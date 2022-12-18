@@ -15,7 +15,7 @@ app.get("/", (req, res) =>{
 });
 app.listen(3001, () => {
   console.log("Server is up");
-  console.log("http://localhost:3000")
+  console.log("http://localhost:3001")
 });
 app.use(bodyParser.json({limit: '16mb'}));
 app.use(bodyParser.urlencoded({extended: false}));
