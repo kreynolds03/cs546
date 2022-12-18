@@ -214,6 +214,13 @@ const updateFollowers = async(username1, username2) =>{
   return true;
 }
 
+const getAllPostsByUser = async(username) => {
+
+    const userCollection = await users();
+
+
+}
+
 module.exports = { 
   createUser,
   checkUser,
