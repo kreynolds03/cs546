@@ -5,6 +5,7 @@ const helpers = require("./datahelpers");
 const { post } = require("../routes/jobNetworkRoutes");
 const companyList = mongoCollections.companies;
 const postList = mongoCollections.posts;
+const jobHistory = mongoCollections.jobhistory;
 
 console.log(mongoCollections);
 
@@ -160,20 +161,25 @@ const checkUser = async (username, password) => {
 
 };
 
-const updateUser = async (username,jobs,bio,education,skills) => {
+const updateUser = async (username, bio, education, skills) => {
 
 
   let nameOfUser = username.toLowerCase();
 
+  
+
 
   const updates = 
   {
-    jobs: jobs,
-    bio: bio,
-    education: education,
-    skills: skills,
-    username: nameOfUser
+    username: nameOfUser,
+    bio: bio, 
+    education: education, 
+    skills : skills
+  
   }
+
+
+  const jobCollection = await jobHistory();
 
   const userCollection = await users();
 
@@ -183,10 +189,60 @@ const updateUser = async (username,jobs,bio,education,skills) => {
   );
 
 
+
+// Users will answer a question if this is their current company when adding a job to their profile
+
+  
+
+
   return updates;
 
 
 }
+
+const addJobToProfile = async(username, position, companyName, startDate, endDate, isCurrentJob) =>{
+
+  let nameOfUser = username.toLowerCase();
+
+
+  const jobCollection = await jobHistory();
+
+  const userCollection = await users();
+
+
+  const oneJob = 
+  {
+    position: position, 
+    companyName : companyName, 
+    isCurrentJob : isCurrentJob, 
+    startDate: startDate,
+    endDate : endDate,
+    username: nameOfUser
+    
+
+  }
+
+   const updateJob = await jobCollection.insertOne(  {username:nameOfUser},
+    {$set: oneJob});
+
+
+  const updateUserJob = await userCollection.updateOne(  {username:nameOfUser},
+      {$push: {jobs:oneJob}});
+
+
+  
+
+
+    return updateJob;
+
+
+
+
+}
+
+
+
+
 
 const updateFollowers = async(username1, username2) =>{
   const userCollection = await users();
@@ -270,7 +326,8 @@ module.exports = {
   updateFollowers,
   getAllPostsByUser,
   getAllUsers,
-  showUserProfile
+  showUserProfile,
+  addJobToProfile
 };
 
 

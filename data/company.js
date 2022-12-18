@@ -41,10 +41,12 @@ const createCompany = async (
       throw 'Company cannot be an empty string or just spaces';
     //company = company.trim();
     console.log(company);
+
+    let companyName = company.toLowerCase();
     
   
     const companyCollection = await companyList();
-    const oneCo = await companyCollection.findOne({company:company});
+    const oneCo = await companyCollection.findOne({company:companyName});
     if (!oneCo) throw 'No company with that name';
   
     return oneCo;

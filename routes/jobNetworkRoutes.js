@@ -185,6 +185,17 @@ router.route("/logout").get(async (req, res) => {
     }
   })
 
+  router
+  .route('/homepage')
+  .get(async(req, res) =>{
+    try{
+      const allUsers = await users.getAllUsers();
+      res.status(200).json(allUsers);
+    } catch(e){
+      res.status(404).json({error:e});
+    }
+  })
+
 
   router
   .route('/:company')
@@ -357,20 +368,44 @@ router.route("/logout").get(async (req, res) => {
   .put(async (req, res) => {
 
     const updatedData = req.body;
-    let username = updatedData.username
-    let jobs = updatedData.jobs;
+    let username = updatedData.username;
     let bio = updatedData.bio;
     let education = updatedData.education;
     let skills = updatedData.skills;
 
     try {
-      const updatedProfile = await updateUser(username, jobs, bio, education, skills);
+      const updatedProfile = await updateUser(username, bio, education, skills);
       res.json(updatedProfile);
     } catch (e) {
       res.status(500).json({error: e});
     }
 
   })
+
+  router
+  .route("/edituserjob")
+  .post(async (req, res) => {
+    const updatedData = req.body;
+
+
+    let position = updatedData.position;
+    let companyName = updatedData.companyName;
+    let isCurrentJob = updatedData.isCurrentJob;
+    let startDate = updatedData.startDate;
+    let endDate = updatedData.endDate;
+    let username = updatedData.username
+
+    try {
+      const updatedJob = await users.addJobToProfile(username,position, companyName, isCurrentJob, startDate, endDate);
+      res.json(updatedJob);
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({error: e});
+    }
+
+
+  })
+
 
   router
   .route('/:username/activity')
@@ -402,16 +437,7 @@ router.route("/logout").get(async (req, res) => {
     }
   })
 
-  router
-  .route('/home')
-  .get(async(req, res) =>{
-    try{
-      const allUsers = await users.getAllUsers();
-      res.status(200).json(allUsers);
-    } catch(e){
-      res.status(404).json({error:e});
-    }
-  })
+  
 
   router
   .route('/home/:username')

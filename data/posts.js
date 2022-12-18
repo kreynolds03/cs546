@@ -30,7 +30,10 @@ const createPost = async (
       if (!insertInfo.acknowledged || !insertInfo.insertedId)
         throw 'Could not add post';
 
+
       const updatedUser = await userCollection.updateOne({username:username}, {$push:{posts:newPostInfo}});
+
+
 
   
     console.log(newPostInfo);
@@ -57,8 +60,14 @@ const createPost = async (
     const userCollection = await users();
     username = username.toLowerCase();
 
-    const oneUser = userCollection.findOne({username:username});
+    const oneUser = await userCollection.findOne({username:username});
+
+    //TUTOR How do I add new posts from people that I follow into the database in the user collection?
+
+    console.log(oneUser);
     let renderedPosts = oneUser.followedUsers.posts;
+
+    console.log(renderedPosts);
 
     return renderedPosts;
 
