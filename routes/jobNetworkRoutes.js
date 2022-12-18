@@ -484,7 +484,7 @@ router.route("/logout").get(async (req, res) => {
 
     try {
       //console.log(req.params.username);
-      const userResume = await fileList.uploadFile(filename, username, fileStream);
+      const userResume = await fileList.uploadFile(filename, username, fileStream, jobId);
       //console.log(req.params._id);
       res.status(200).json(userResume);
     } catch (e) {

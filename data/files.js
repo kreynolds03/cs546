@@ -39,7 +39,8 @@ const uploadFile = async (filename, username, fileStream, jobListingId) => {
     const newFileInfo = {
         username: username,
         filename: filename,
-        data: data
+        data: data,
+        jobListingId: ObjectId(jobListingId)
     }
 
     const oneFile = await fileCollection.insertOne(newFileInfo);

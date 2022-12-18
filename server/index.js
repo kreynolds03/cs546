@@ -1,9 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const jobNetworkRoutes = require('../routes/jobNetworkRoutes');
 
 
 const bodyParser = require("body-parser");
+
+console.log(process.env.JWT_SECRET);
 
 
 
