@@ -402,6 +402,31 @@ router.route("/logout").get(async (req, res) => {
     }
   })
 
+  router
+  .route('/home')
+  .get(async(req, res) =>{
+    try{
+      const allUsers = await users.getAllUsers();
+      res.status(200).json(allUsers);
+    } catch(e){
+      res.status(404).json({error:e});
+    }
+  })
+
+  router
+  .route('/home/:username')
+  .get(async(req,res) =>{
+    try{
+    let username = req.params.username;
+    const followedPosts = await posts.getPostsByFollowers(username);
+
+    res.status(200).json(followedPosts);
+    } catch(e){
+      res.status(404).json({error:e});
+    }
+
+  })
+
   
 
 

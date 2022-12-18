@@ -38,13 +38,13 @@ const createPost = async (
   
   };
 
-  const getPostById = async (postId) => {
-    //console.log(movieId);
-    helpers.checkId(postId);
-    const postCollection = await postList();
-    return await postCollection.findOne({_id: ObjectId(postId)})
+  // const getPostById = async (postId) => {
+  //   //console.log(movieId);
+  //   helpers.checkId(postId);
+  //   const postCollection = await postList();
+  //   return await postCollection.findOne({_id: ObjectId(postId)})
   
-  };
+  // };
 
   const removePost = async (movieId) => {
     movieId = helper.checkId(movieId);
@@ -52,10 +52,21 @@ const createPost = async (
   
     return await movieCollection.deleteOne({_id: ObjectId(movieId)});
   };
+
+  const getPostsByFollowers = async(username) => {
+    const userCollection = await users();
+    username = username.toLowerCase();
+
+    const oneUser = userCollection.findOne({username:username});
+    let renderedPosts = oneUser.followedUsers.posts;
+
+    return renderedPosts;
+
+  }
   
 
 
 
 
-  module.exports = { createPost, getPostById, removePost };
+  module.exports = { createPost, getPostsByFollowers, removePost };
 

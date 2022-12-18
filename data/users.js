@@ -239,12 +239,20 @@ const getAllPostsByUser = async(username) => {
 
 }
 
+const getAllUsers = async()=>{
+  const userCollection = await users();
+  const userList = await userCollection.find({}).toArray();
+
+  return userList;
+}
+
 module.exports = { 
   createUser,
   checkUser,
   updateUser,
   updateFollowers,
-  getAllPostsByUser
+  getAllPostsByUser,
+  getAllUsers
 };
 
 
