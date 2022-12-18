@@ -233,8 +233,9 @@ router.route("/logout").get(async (req, res) => {
     
 
     try {
-      console.log(req.body);
+      //console.log(req.body);
       //need to validate the input still 
+      //let userID = req.body.userID;
       let jobTitle = req.body.jobTitle;
       let education = req.body.education;
       let yearsofExp = req.body.yearsofExp;
@@ -250,7 +251,7 @@ router.route("/logout").get(async (req, res) => {
   
      
     } catch (e) {
-      return res.status(500).send({message: e});
+      return res.status(500).send(e);
     }
   })
 
