@@ -13,7 +13,7 @@ const users = require("../data/users");
 const comments = require("../data/comments");
 const likes = require("../data/likes");
 const fileList = require("../data/files");
-const {encode, decode} = require("../utils/jwt")
+const {encode, decode, validateToken} = require("../utils/jwt")
 
 
 
@@ -26,16 +26,27 @@ const router = express.Router();
 
 
 
-function authMiddleware(req, res, next){
+async function authMiddleware(req, res, next){
   const {authorization} = req.headers;
   if(!authorization) {
     return res.status(401).json({message: "Please provide an authentication token"});
   }
-  if(!req.session.username) {
-    res.status(403).send({message: e});
-  } else {
+
+  try { 
+    const [_,token] = authorization.trim().split(' ');
+    const validToken = await validateToken(token);
+    if(!validToken) {
+      return res.status(403).json({message: "You are not authorized to access this resource!"});
+    }
+
+    req.user = await decode(token);
     next();
+
+
+  } catch {
+
   }
+  
 }
 
 
