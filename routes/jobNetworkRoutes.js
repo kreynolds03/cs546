@@ -492,10 +492,10 @@ router.route("/logout").get(async (req, res) => {
 
   router
   .route('/uploadresume')
-  .post(async (req, res) =>{
+  .post(authMiddleware, async (req, res) =>{
 
     const updatedData = req.body;
-
+ 
     let filename = updatedData.filename;
     let username = updatedData.username;
     let fileStream = updatedData.filestream;

@@ -2,9 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const encode = async (username) => { 
     const payload = {username};
-    console.log(process.env.JWT_SECRET,"hello world");
 
-    console.log(jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'14d'}));
 
     return jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'14d'});
 }
@@ -15,7 +13,16 @@ const decode = async (token) => {
 }
 
 const validateToken = async (token) => { 
-    return jwt.verify(token,process.env.JWT_SECRET);
+    return new Promise((resolve, reject) => {
+        jwt.verify(token,process.env.JWT_SECRET,(error) => {
+            if(error) {
+                resolve(false);
+            }
+            else {
+                resolve(true);
+            }
+        });
+    }) 
 }
 
 module.exports = { encode, decode, validateToken}
