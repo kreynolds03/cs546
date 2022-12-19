@@ -165,6 +165,8 @@ class SignUp extends React.Component{
 
         });
 
+        this.props.setSignUp(false)
+
     };
 
     resetUserInputs = () => {

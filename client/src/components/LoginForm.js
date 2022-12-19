@@ -23,6 +23,10 @@ class LoginForm extends React.Component {
         
     }
 
+    setSignUp = () => {
+        this.props.setSignUp(true)
+    }
+
 
     render(){
     return (
@@ -37,7 +41,7 @@ class LoginForm extends React.Component {
                 <br></br>
                 <br></br>
                 <button type="login">Login</button>
-                <button type="login">Sign Up</button>
+                <button type="login" onClick = {this.setSignUp}>Sign Up</button>
                 <br></br>
                 <br></br>
             </form>
