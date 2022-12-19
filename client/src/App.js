@@ -4,13 +4,14 @@ import './App.css';
 import LoginForm from './components/LoginForm';
 import NavBar from './components/NavBar'
 import SignUp from "./components/SignUp";
-// import Jobs from "./components/Jobs";
+import Jobs from "./components/Jobs";
 import ProfilePage from "./components/ProfilePage";
 import CreateJob from "./components/CreateJob"
 import CreateCompany from "./components/CreateCompany"
 import EditProfile from "./components/EditProfile";
 import AllUsers from "./components/AllUsers"
 import HomePage from './components/HomePage';
+import Apply from './components/Apply';
 import ViewMoreDetails from "./components/ViewMoreDetails";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import axios from "axios";
@@ -40,8 +41,10 @@ function App() {
 
 
 // const user = getUser();
+const [currentJob, setCurrentJob] = React.useState({})
 const [user, setUser] = React.useState(null)
 // console.log(user);
+const [showJob, setShowJob] = React.useState(false)
 React.useEffect(() => {
 
     checkUser();
@@ -102,6 +105,10 @@ if(!user && signUp){
     return <SignUp setSignUp = {setSignUp} />
 }
 
+if(showJob) {
+    return <Apply setShowJob = {setShowJob}  currentJob = {currentJob} user = {sessionStorage.getItem('user')}/>
+}
+
 
  return(
  <div>
@@ -113,7 +120,7 @@ if(!user && signUp){
             <Route path='/' element={<HomePage user = {JSON.parse(sessionStorage.getItem('user'))}/>}>HomePage</Route>
             <Route path ='/login' element={<LoginForm />}></Route>
             <Route path ='/signup' element={<SignUp />}>Sign Up</Route>
-            {/* <Route path='/jobs' element={<Jobs />}>Jobs</Route> */}
+            <Route path='/jobs' element={<Jobs setCurrentJob={setCurrentJob} setShowJob={setShowJob} user = {sessionStorage.getItem('user')} />}>Jobs</Route> 
             <Route path='/createJob' element={<CreateJob />}>Create Job</Route>
             <Route path='/createCompany' element={<CreateCompany />}>Create Company</Route>
             <Route path='/profile' element={<ProfilePage user = {sessionStorage.getItem('user')}/>}></Route>

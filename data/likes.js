@@ -2,6 +2,7 @@ const mongoCollections = require("../MongoConnection/mongoCollection")
 const posts = mongoCollections.posts;
 const users = mongoCollections.users;
 const likes = mongoCollections.likes;
+const helpers = require("./datahelpers");
 
 
 const addLike = async (username, title) =>{
@@ -13,6 +14,7 @@ const addLike = async (username, title) =>{
 
     //format username
     let nameOfUser = username.toLowerCase();
+    helpers.isString(nameOfUser);
     //find user by username
     const foundUser = await userCollection.findOne({username:nameOfUser});
     //capture userID

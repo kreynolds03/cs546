@@ -1,5 +1,6 @@
 const mongoCollections = require("../MongoConnection/mongoCollection")
 const companyList = mongoCollections.companies;
+const helpers = require("./datahelpers");
 
 const createCompany = async (
     company,
@@ -10,6 +11,8 @@ const createCompany = async (
       const companyCollection = await companyList();
 
       let companyName = company.toLowerCase();
+      helpers.isString(companyName);
+      helpers.isString(username);
       
   
       const newCompanyInfo = {
@@ -40,6 +43,8 @@ const createCompany = async (
     const companyCollection = await companyList();
 
     companyName = companyName.toLowerCase();
+    helpers.isString(username);
+    helpers.isString(companyName);
 
     const foundCompany = await companyCollection.findOne({company:companyName});
     console.log("foundCompany: ", foundCompany);
