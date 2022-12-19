@@ -392,10 +392,10 @@ router.route("/logout").get(async (req, res) => {
     let username = updatedData.username;
     let bio = updatedData.bio;
     //let education = updatedData.education;
-    let skills = updatedData.skills;
+    // let skills = updatedData.skills;
 
     try {
-      const updatedProfile = await updateUser(username, bio, skills);
+      const updatedProfile = await updateUser(username, bio);
       res.json(updatedProfile);
     } catch (e) {
       res.status(500).json({error: e});

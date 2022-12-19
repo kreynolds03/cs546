@@ -168,7 +168,7 @@ const checkUser = async (username, password) => {
 
 };
 
-const updateUser = async (username, bio, skills) => {
+const updateUser = async (username, bio) => {
 
 
   let nameOfUser = username.toLowerCase();
@@ -179,8 +179,7 @@ const updateUser = async (username, bio, skills) => {
   const updates = 
   {
     username: nameOfUser,
-    bio: bio, 
-    skills : skills
+    bio: bio
   
   }
 
