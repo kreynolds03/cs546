@@ -21,13 +21,13 @@ const uploadFile = async (filename, username, jobListingId) => {
     const nameOfUser = username.toLowerCase();
 
 
-    const user = await userCollection.findOne({username:nameOfUser});
+    const user = await userCollection.find({username:nameOfUser});
 
     if(!user) {
         throw "Need a valid username";
     }
 
-    const job = await jobCollection.findOne({_id:ObjectId(jobListingId)});
+    const job = await jobCollection.find({_id:ObjectId(jobListingId)});
 
     if(!job) {
         throw "Need a valid job";

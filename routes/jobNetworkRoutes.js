@@ -505,9 +505,10 @@ router.route("/logout").post(async (req, res) => {
     console.log(updatedData);
 
  
-    let filename = updatedData.filename;
-    let username = updatedData.username;
-    let jobId = updatedData.jobId;
+    let filename = req.body.filename;
+    let username = req.body.username;
+    console.log(username);
+    let jobId = req.body.jobId;
 
     try {
       //console.log(req.params.username);
