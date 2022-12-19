@@ -5,11 +5,11 @@ import {useState, useEffect} from "react";
 // Insert job details here
 
 
-function Apply({setShowJob, job}) {
+function Apply({setShowJob, job, user}) {
 const [usersResume, setUsersResume] = useState(null);
 function onChangeHandler(files) {
     setUsersResume(files);
-    axios.post('http://127.0.0.1:3001/uploadresume',{})
+    axios.post('http://127.0.0.1:3001/uploadresume',{job:job._id})
 
 }
 
