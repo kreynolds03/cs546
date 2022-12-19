@@ -106,7 +106,8 @@ if(!user && signUp){
 }
 
 if(showJob) {
-    return <Apply setShowJob = {setShowJob}  currentJob = {currentJob} user = {sessionStorage.getItem('user')}/>
+    console.log("Hello world");
+    return <Apply setShowJob = {setShowJob}  job = {currentJob} user = {sessionStorage.getItem('user')}/>
 }
 
 

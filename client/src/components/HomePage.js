@@ -1,3 +1,4 @@
+import axios from "axios"
 import React from "react"
 import CreatePost from "./CreatePost"
 
@@ -5,7 +6,8 @@ import CreatePost from "./CreatePost"
 export default class HomePage extends React.Component{
 
     state = {
-        createPost: false
+        createPost: false,
+        posts: []
     }
 
 
@@ -13,6 +15,23 @@ export default class HomePage extends React.Component{
         this.setState({
             createPost: !this.state.createPost
         })
+    }
+
+    renderFollowedPosts = () => {
+        this.props.user.followedUsers.map(username => {
+            axios.get(`http://localhost:3001/profile/${username}`)
+            .then(res => {
+                console.log(res.data)
+                res.data.posts.map(post => {
+                let newArr = this.state.posts
+                newArr.push(post)
+                this.setState({
+                    posts: newArr
+                })})
+            }).then(console.log(this.state.posts))     
+        
+        })
+
     }
 
 
@@ -25,6 +44,7 @@ export default class HomePage extends React.Component{
                 <button onClick={this.changeState}>Create A Post</button>
                 {console.log(this.state.createPost)}
                 {this.state.createPost? <CreatePost username = {this.props.user.username} setCreatePost = {this.changeState}/> : <></>}
+                {this.renderFollowedPosts()}
             </div>
         )
     }

@@ -6,7 +6,6 @@ const users = mongoCollections.users;
 
 
 
-
 const createPost = async (
     username,
     title,

@@ -10,7 +10,7 @@ export default class Jobs extends React.Component {
 
     componentDidMount(){
         axios.get('http://127.0.0.1:3001/jobs')
-        .then(response => {console.log(response.data)})
+        .then(response => {this.setState({data: response.data})})
         .catch(error => {
             console.log(error);
         })
@@ -22,7 +22,7 @@ export default class Jobs extends React.Component {
             return (
             <div className='jobCard'>
                 <h3>{job.jobTitle}</h3>
-                <h4>Company: {job.company}</h4>
+                <h4 >Company: {job.company}</h4>
                 <p>Description: {job.description}</p>
                 <p>Job ID: {job._id.toString()}</p>
                 <p>Education: {job.education}</p>
@@ -44,7 +44,24 @@ export default class Jobs extends React.Component {
                 <br></br>
                 This is the Jobs COmponent
                 <br></br>
-                {this.renderJobs()}
+                {this.state.data.map(job => {
+            return (
+            <div className='jobCard'>
+                <h3>{job.jobTitle}</h3>
+                <h4 >Company: {job.company}</h4>
+                <p>Description: {job.description}</p>
+                <p>Job ID: {job._id.toString()}</p>
+                <p>Education: {job.education}</p>
+                <p>Post Date: {job.postDate}</p>  
+                <button onClick={
+                    () => {
+                        this.props.setShowJob(true);
+                        this.props.setCurrentJob(job);
+                    
+                    }}
+                >Apply to job</button>  
+            </div>)
+        })}
                 <a href='/createJob'>Create A Job</a>
                 <br></br>
                 <a href='/createCompany'>Create A Company</a>

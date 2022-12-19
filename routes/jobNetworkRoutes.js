@@ -498,9 +498,12 @@ router.route("/logout").post(async (req, res) => {
 
   router
   .route('/uploadresume')
-  .post( async (req, res) =>{
+  .post(async (req, res) =>{
 
-    //const updatedData = req.body;
+    const updatedData = req.body;
+
+    console.log(updatedData);
+
  
     let filename = req.body.filename;
     let username = req.body.username;
