@@ -9,7 +9,8 @@ function Apply({setShowJob, job, user}) {
 const [usersResume, setUsersResume] = useState(null);
 function onChangeHandler(files) {
     setUsersResume(files);
-    axios.post('http://127.0.0.1:3001/uploadresume',{job:job._id})
+    axios.post('http://127.0.0.1:3001/uploadresume',{job:job._id,username: user.username, file:files.name})
+    .then((response)=>{alert("Resume uploaded successfully!")})
 
 }
 
