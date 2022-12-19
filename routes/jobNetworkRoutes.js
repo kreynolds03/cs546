@@ -498,13 +498,14 @@ router.route("/logout").post(async (req, res) => {
 
   router
   .route('/uploadresume')
-  .post(authMiddleware, async (req, res) =>{
+  .post( async (req, res) =>{
 
-    const updatedData = req.body;
+    //const updatedData = req.body;
  
-    let filename = updatedData.filename;
-    let username = updatedData.username;
-    let jobId = updatedData.jobId;
+    let filename = req.body.filename;
+    let username = req.body.username;
+    console.log(username);
+    let jobId = req.body.jobId;
 
     try {
       //console.log(req.params.username);
