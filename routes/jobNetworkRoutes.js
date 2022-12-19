@@ -166,11 +166,11 @@ router.route("/logout").post(async (req, res) => {
   //code here for GET
   //res.render("logout");
 
-  console.log("We are touching the logout route");
+  //console.log("We are touching the logout route");
 
   const {token} = req.body;
 
-  console.log(token);
+ // console.log(token);
 
   if(!token) {
     return res.status(403).json({message: "Please provide a token to invalidate"})
