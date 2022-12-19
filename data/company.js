@@ -3,7 +3,8 @@ const companyList = mongoCollections.companies;
 
 const createCompany = async (
     company,
-    about
+    about,
+    username
   ) => { 
   
       const companyCollection = await companyList();
@@ -16,7 +17,7 @@ const createCompany = async (
         about: about,
         people: [],
         jobs: [],
-        companyOwner : null
+        companyOwner : username
         
       };
     const foundCompany = await companyCollection.findOne({companyName});

@@ -213,6 +213,7 @@ const addJobToProfile = async(username, position, companyName, startDate, endDat
   const jobCollection = await jobHistory();
 
   const userCollection = await users();
+  const companyCollection = await companyList();
 
 
   const oneJob = 
@@ -235,7 +236,11 @@ const addJobToProfile = async(username, position, companyName, startDate, endDat
       {$push: {jobs:oneJob}});
 
 
+  const updateCompany = await companyCollection.updateOne({company:companyName}, {$push: {people: nameOfUser}});
   
+
+
+  //Hello world
 
 
     return updateJob;
