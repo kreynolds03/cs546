@@ -2,13 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const jobNetworkRoutes = require('../routes/jobNetworkRoutes');
-
+var cors = require('cors')
 
 const bodyParser = require("body-parser");
 
 console.log(process.env.JWT_SECRET);
 
 
+app.use(cors())
 
 app.get("/", (req, res) =>{
   res.json({message: "Login page"});

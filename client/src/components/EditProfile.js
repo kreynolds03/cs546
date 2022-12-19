@@ -5,7 +5,7 @@ export default class EditProfile extends React.Component{
 
 
     state = {
-        name: this.props.user.name,
+        name: this.props.user.firstName,
         email: this.props.user.email,
         birthday: this.props.user.birthday,
         bio: this.props.user.bio,
@@ -66,7 +66,7 @@ export default class EditProfile extends React.Component{
                 <input type="text" id="bio" name="bio" defaultValue={this.props.user.bio} onChange={this.eventHandler}></input>
                 <br></br>
               
-                <button type="login" onClick={this.handleSubmit}>Login</button>
+                <button type="login" onClick={this.handleSubmit}>Edit Profile</button>
                 </form>
             </div>
         )

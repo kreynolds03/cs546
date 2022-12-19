@@ -104,8 +104,9 @@ if(!user){
             {/* <Route path='/jobs' element={<Jobs />}>Jobs</Route> */}
             <Route path='/createJob' element={<CreateJob />}>Create Job</Route>
             <Route path='/createCompany' element={<CreateCompany />}>Create Company</Route>
-            
-            
+            <Route path='/profile' element={<ProfilePage user = {sessionStorage.getItem('user')}/>}>Create Company</Route>
+            <Route path='/editProfile' element={<EditProfile user = {JSON.parse(sessionStorage.getItem('user'))}/>}>Create Company</Route>
+
 
 
         </Routes>
