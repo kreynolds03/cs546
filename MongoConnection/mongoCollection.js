@@ -26,7 +26,8 @@ module.exports = {
   comments: getCollectionFn("comments"),
   likes: getCollectionFn("likes"),
   jobhistory: getCollectionFn("jobs"),
-  files: getCollectionFn("files")
+  files: getCollectionFn("files"),
+  invalidtokens : getCollectionFn("invalidtokens")
 
  
 };

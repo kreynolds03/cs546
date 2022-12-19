@@ -13,6 +13,7 @@ const users = require("../data/users");
 const comments = require("../data/comments");
 const likes = require("../data/likes");
 const fileList = require("../data/files");
+const invalidTokens = require("../data/invalidtokens");
 const {encode, decode, validateToken} = require("../utils/jwt")
 
 
@@ -29,13 +30,19 @@ const router = express.Router();
 async function authMiddleware(req, res, next){
   const {authorization} = req.headers;
   if(!authorization) {
+    console.log("Test1")
     return res.status(401).json({message: "Please provide an authentication token"});
   }
 
   try { 
     const [_,token] = authorization.trim().split(' ');
+    console.log(token);
     const validToken = await validateToken(token);
-    if(!validToken) {
+    const isBlacklisted = await invalidTokens.checkTokenIsBlacklisted(token);
+
+    console.log("isBlackListed:", isBlacklisted);
+
+    if(!validToken || !isBlacklisted) {
       return res.status(403).json({message: "You are not authorized to access this resource!"});
     }
 
@@ -155,26 +162,24 @@ router.route("/protected").get(authMiddleware, async (req, res) => {
   }
 });
 
-router.route("/logout").get(async (req, res) => {
+router.route("/logout").post(async (req, res) => {
   //code here for GET
   //res.render("logout");
 
-  if(!req.session.username) {
+  console.log("We are touching the logout route");
 
-    console.log(new Date().toUTCString() + ": GET /logout (Non-Authenticated User)");
+  const {token} = req.body;
+
+  console.log(token);
+
+  if(!token) {
+    return res.status(403).json({message: "Please provide a token to invalidate"})
   }
 
-  else {
+  await invalidTokens.insertToken(token);
 
-    console.log(new Date().toUTCString() + ": GET /logout (Authenticated User)");
+  return res.status(200).send();
 
-
-  }
-
-  req.session.destroy();
-  //res.redirect("/");
-
-  //res.render("logout")
 
 
 
