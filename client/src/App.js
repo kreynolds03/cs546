@@ -9,7 +9,9 @@ import ProfilePage from "./components/ProfilePage";
 import CreateJob from "./components/CreateJob"
 import CreateCompany from "./components/CreateCompany"
 import EditProfile from "./components/EditProfile";
+import AllUsers from "./components/AllUsers"
 import HomePage from './components/HomePage';
+import ViewMoreDetails from "./components/ViewMoreDetails";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import axios from "axios";
 
@@ -86,8 +88,18 @@ const loginUser = (username, password) => {
         .catch(err => alert('You recieved the following error: ' + err))
 
 }
-if(!user){
-   return <LoginForm loginUser = {loginUser} />
+
+
+
+const [signUp, setSignUp] = React.useState(false)
+
+
+if(!user && !signUp){
+   return <LoginForm loginUser = {loginUser} setSignUp = {setSignUp}/>
+}
+
+if(!user && signUp){
+    return <SignUp setSignUp = {setSignUp} />
 }
 
 
@@ -98,7 +110,7 @@ if(!user){
         <NavBar />
 
         <Routes>
-            <Route path='/' element={<HomePage />}>HomePage</Route>
+            <Route path='/' element={<HomePage user = {JSON.parse(sessionStorage.getItem('user'))}/>}>HomePage</Route>
             <Route path ='/login' element={<LoginForm />}></Route>
             <Route path ='/signup' element={<SignUp />}>Sign Up</Route>
             {/* <Route path='/jobs' element={<Jobs />}>Jobs</Route> */}
@@ -106,6 +118,9 @@ if(!user){
             <Route path='/createCompany' element={<CreateCompany />}>Create Company</Route>
             <Route path='/profile' element={<ProfilePage user = {sessionStorage.getItem('user')}/>}></Route>
             <Route path='/editProfile' element={<EditProfile user = {JSON.parse(sessionStorage.getItem('user'))} getUserData = {getUserData}/>}></Route>
+            <Route path='/allUsers' element={<AllUsers user = {JSON.parse(sessionStorage.getItem('user'))}/>}></Route>
+            <Route path='/viewMoreDetails/:username' element={<ViewMoreDetails user = {JSON.parse(sessionStorage.getItem('user'))}/>}></Route>
+
 
 
 
