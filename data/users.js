@@ -79,6 +79,13 @@ const createUser = async (
     throw "Sorry. This username is taken. Please try another username";
   }
 
+  const foundEmail = await userCollection.find({email}).toArray();
+  console.log("foundEmail: ", foundEmail);
+  if(foundEmail.length > 0) {
+    throw "Sorry. This email is already used. Please check if you already have an account!";
+  }
+
+
   const hash = await bcrypt.hash(password, 10)
   const newUser = 
   {
@@ -161,7 +168,7 @@ const checkUser = async (username, password) => {
 
 };
 
-const updateUser = async (username, bio, education, skills) => {
+const updateUser = async (username, bio, skills) => {
 
 
   let nameOfUser = username.toLowerCase();
@@ -173,7 +180,6 @@ const updateUser = async (username, bio, education, skills) => {
   {
     username: nameOfUser,
     bio: bio, 
-    education: education, 
     skills : skills
   
   }
