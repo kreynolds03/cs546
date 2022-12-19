@@ -38,6 +38,8 @@ const createCompany = async (
 
     const companyCollection = await companyList();
 
+    companyName = companyName.toLowerCase();
+
     const foundCompany = await companyCollection.findOne({company:companyName});
     console.log("foundCompany: ", foundCompany);
     if(!foundCompany) {

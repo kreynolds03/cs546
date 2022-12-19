@@ -521,6 +521,8 @@ router.route("/logout").get(async (req, res) => {
       let companyName = req.params.company;
       let username = updatedData.username;
 
+      console.log(companyName);
+
 
       try {
         //console.log(req.params.username);
