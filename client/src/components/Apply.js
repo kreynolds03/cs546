@@ -10,11 +10,11 @@ const [usersResume, setUsersResume] = useState(null);
 function onChangeHandler(files) {
     setUsersResume(files);
     axios.post('http://127.0.0.1:3001/uploadresume',{job:job._id,username: user.username, file:files.name})
-    .then((response)=>{alert("Resume uploaded successfully!")})
+    .then((response)=>{alert("Resume uploaded successfully!"); setShowJob(false)})
 
 }
 
-    return (
+    return ( <>
         <h3>{job.jobTitle}</h3>
                 <h4>Company: {job.company}</h4>
                 <p>Description: {job.description}</p>
@@ -22,11 +22,11 @@ function onChangeHandler(files) {
                 <p>Education: {job.education}</p>
                 <p>Post Date: {job.postDate}</p> 
                 <p>Click below to upload your resume:</p>
-                <input type="file" name="file" onChange={onChangeHandler(event.target.files) => {}}/>
+                <input type="file" name="file" onChange={(event) => onChangeHandler(event.target.files)}/>
+                </>
 
     )
 
-    <input type="file" name="file" onChange={this.onChangeHandler}/>
 
 
 
