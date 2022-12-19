@@ -396,11 +396,12 @@ router.route("/logout").post(async (req, res) => {
     const updatedData = req.body;
     let username = updatedData.username;
     let bio = updatedData.bio;
+    let skills = updatedData.skills;
     //let education = updatedData.education;
     // let skills = updatedData.skills;
 
     try {
-      const updatedProfile = await updateUser(username, bio);
+      const updatedProfile = await updateUser(username, bio, skills);
       res.json(updatedProfile);
     } catch (e) {
       res.status(500).json({error: e});
@@ -420,6 +421,7 @@ router.route("/logout").post(async (req, res) => {
     let startDate = updatedData.startDate;
     let endDate = updatedData.endDate;
     let username = updatedData.username
+    
 
     try {
       const updatedJob = await users.addJobToProfile(username,position, companyName, isCurrentJob, startDate, endDate);

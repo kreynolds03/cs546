@@ -168,34 +168,30 @@ const checkUser = async (username, password) => {
 
 };
 
-const updateUser = async (username, bio) => {
+const updateUser = async (username, bio, skills) => {
 
 
   let nameOfUser = username.toLowerCase();
+  helpers.isString(nameOfUser);
+  helpers.isString(bio);
+  helpers.isString(skills);
 
-  
 
-
-  const updates = 
+  const profile = 
   {
-    username: nameOfUser,
-    bio: bio
+    bio: bio,
+    skills:skills
   
   }
 
 
-  const jobCollection = await jobHistory();
 
   const userCollection = await users();
 
   const updatedUserProfile = await userCollection.updateMany(
     {username:nameOfUser},
-    {$set: updates}
+    {$set: profile}
   );
-
-
-
-// Users will answer a question if this is their current company when adding a job to their profile
 
   
 
@@ -208,6 +204,12 @@ const updateUser = async (username, bio) => {
 const addJobToProfile = async(username, position, companyName, startDate, endDate, isCurrentJob) =>{
 
   let nameOfUser = username.toLowerCase();
+  helpers.isString(position);
+  helpers.isString(companyName);
+  helpers.isString(isCurrentJob);
+  helpers.isDate(startDate);
+  helpers.isDate(endDate);
+  helpers.isString(nameOfUser);
 
 
   const jobCollection = await jobHistory();
