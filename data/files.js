@@ -49,7 +49,7 @@ const uploadFile = async (filename, username, jobListingId) => {
 
 
 
-    return true; 
+    return oneFile; 
 
 
 }

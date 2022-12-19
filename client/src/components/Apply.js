@@ -15,6 +15,7 @@ function onChangeHandler(files) {
 }
 
     return ( <>
+    {console.log(job)}
         <h3>{job.jobTitle}</h3>
                 <h4>Company: {job.company}</h4>
                 <p>Description: {job.description}</p>
