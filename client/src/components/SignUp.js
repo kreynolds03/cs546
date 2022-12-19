@@ -190,16 +190,22 @@ class SignUp extends React.Component{
 
             <div className='signUp'>,
                 <form onSubmit={this.submit}>
-                    <input type="text" id="email" name="email" value={this.state.email} onChange={this.eventHandler}></input>
-                    <br></br>
-                    <input type="text" id="password" name="password" value={this.state.password} onChange={this.eventHandler}></input>
-                    <br></br>
+                    <label>Username</label>
                     <input type="text" id="username" name="username" value={this.state.username} onChange={this.eventHandler}></input> 
                     <br></br>
+                    <label>Password</label>
+                    <input type="text" id="password" name="password" value={this.state.password} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label>Email</label>
+                    <input type="text" id="email" name="email" value={this.state.email} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label>Birthday</label>
                     <input type="text" id="birthday" name="birthday" value={this.state.birthday} onChange={this.eventHandler}></input>
                     <br></br>
+                    <label>First Name</label>
                     <input type="text" id="firstName" name="firstName" value={this.state.firstName} onChange={this.eventHandler}></input>
                     <br></br>
+                    <label>Last Name</label>
                     <input type="text" id="lastName" name="lastName" value={this.state.lastName} onChange={this.eventHandler}></input>
                     <br></br>
                     <button>Submit</button>

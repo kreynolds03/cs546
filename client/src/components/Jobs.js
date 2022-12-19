@@ -22,7 +22,7 @@ export default class Jobs extends React.Component {
             return (
             <div className='jobCard'>
                 <h3>{job.jobTitle}</h3>
-                <h4>Company: {job.company}</h4>
+                <h4 >Company: {job.company}</h4>
                 <p>Description: {job.description}</p>
                 <p>Job ID: {job._id.toString()}</p>
                 <p>Education: {job.education}</p>

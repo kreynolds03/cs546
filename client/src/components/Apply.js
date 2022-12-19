@@ -23,9 +23,9 @@ function onChangeHandler(files) {
                 <p>Post Date: {job.postDate}</p> 
                 <p>Click below to upload your resume:</p>
                 <input type="file" name="file" onChange={(event) => onChangeHandler(event.target.files)}/>
-                </>
+                
 
-    )
+   </> )
 
 
 
