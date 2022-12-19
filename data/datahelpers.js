@@ -84,4 +84,4 @@ function checkId(id, varName) {
 
 
 
-module.exports = { isAlpha, isValidDate, checkId, checkEmail };
+module.exports = { isAlpha, isValidDate, checkId, checkEmail, isString };
