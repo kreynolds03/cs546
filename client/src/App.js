@@ -110,7 +110,7 @@ if(!user && signUp){
         <NavBar />
 
         <Routes>
-            <Route path='/' element={<HomePage />}>HomePage</Route>
+            <Route path='/' element={<HomePage user = {JSON.parse(sessionStorage.getItem('user'))}/>}>HomePage</Route>
             <Route path ='/login' element={<LoginForm />}></Route>
             <Route path ='/signup' element={<SignUp />}>Sign Up</Route>
             {/* <Route path='/jobs' element={<Jobs />}>Jobs</Route> */}

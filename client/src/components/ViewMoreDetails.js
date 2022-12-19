@@ -27,12 +27,12 @@ function ViewMoreDetails(props) {
     const { username } = useParams()
 
 
-    const [userData, setUserData] = useState(null)
+    const [userData, setUserData] = useState()
 
     useEffect(() => {
         axios.get(`http://localhost:3001/profile/${username}`)
         .then(res => setUserData(res.data))
-    })
+    }, username)
 
 
         return(
