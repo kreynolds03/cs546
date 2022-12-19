@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
+
 /*
 class SignUp extends React.Component{
 
@@ -145,6 +146,77 @@ class SignUp extends React.Component{
 
         };
 
+
+        if(!payload.username || !payload.password || !payload.lastName || !payload.firstName || !payload.birthday || !payload.email) {
+            throw "Please supply, first name, lastname, email, birthday, username, and password";
+          }
+        
+          //console.log(2);
+        
+        
+          if(typeof payload.username !== 'string') {
+            throw "Please supply only a string value for username";
+          }
+        
+          //console.log(3);
+        
+        
+          if(typeof payload.password !== 'string') {
+            throw "Please supply only a string value for password";
+          }
+        
+          if(typeof payload.firstName !== 'string' || typeof payload.lastName != 'string') {
+            throw "Please supply only a string value for first name and last name";
+          }
+        
+          //console.log(4);
+        
+        
+          if(payload.password.length < 6 || payload.username.length < 4) {
+            throw "Your username or password was too short in length";
+          }
+
+          // helpers.isAlpha(payload.username);
+
+          if(/^[A-Za-z0-9]*$/.test(payload.username) == false) {
+
+            throw "You can only enter alphanumeric characters in your username";
+        
+          }
+
+          if(!payload.email.includes("@")){
+
+            throw "Bad Email"
+
+          }
+
+          let emailArr = payload.email.split("@");
+            
+          if(emailArr[1] != "stevens.edu"){
+
+            throw "Bad Email"
+
+          }
+
+          if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(payload.birthday)){
+           
+            throw "Please enter a proper date format of mm/dd/yyyy";
+          
+        }
+        // Parse the date parts to integers
+        var parts = payload.birthday.split("/");
+        var day = parseInt(parts[1], 10);
+        var month = parseInt(parts[0], 10);
+        var year = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+        if(month == 0 || month > 12 || year > 2022 || year < 1000){
+
+            throw "Enter a proper date please!";
+        
+        }
+        
+
         axios({
 
             url: 'http://localhost:3001/register',
@@ -190,6 +262,7 @@ class SignUp extends React.Component{
 
             <div className='signUp'>,
                 <form onSubmit={this.submit}>
+<<<<<<< HEAD
                     <label>Username</label>
                     <input type="text" id="username" name="username" value={this.state.username} onChange={this.eventHandler}></input> 
                     <br></br>
@@ -206,6 +279,24 @@ class SignUp extends React.Component{
                     <input type="text" id="firstName" name="firstName" value={this.state.firstName} onChange={this.eventHandler}></input>
                     <br></br>
                     <label>Last Name</label>
+=======
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" id="email" name="email" value={this.state.email} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label htmlFor="password">Password: </label>
+                    <input type="text" id="password" name="password" value={this.state.password} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label htmlFor="username">Username: </label>
+                    <input type="text" id="username" name="username" value={this.state.username} onChange={this.eventHandler}></input> 
+                    <br></br>
+                    <label htmlFor="birthday">Birthday: </label>
+                    <input type="text" id="birthday" name="birthday" value={this.state.birthday} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label htmlFor="firstName">First Name: </label>
+                    <input type="text" id="firstName" name="firstName" value={this.state.firstName} onChange={this.eventHandler}></input>
+                    <br></br>
+                    <label htmlFor="lastName">Last Name: </label>
+>>>>>>> 934f6f57da5a7366db2c19feda39272d2c6c8683
                     <input type="text" id="lastName" name="lastName" value={this.state.lastName} onChange={this.eventHandler}></input>
                     <br></br>
                     <button>Submit</button>
