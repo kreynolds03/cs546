@@ -20,7 +20,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 //const users = mongoCollections.users; // Not using this here, using axios to pull from routes
 
 
-
 function setUser(user){
     sessionStorage.setItem('token', JSON.stringify(user))
 }
@@ -30,6 +29,8 @@ function getUser(){
     const userToken = JSON.parse(tokenString);
     return userToken?.token
 }
+
+
 
 
 function App() {
