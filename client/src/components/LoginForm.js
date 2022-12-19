@@ -1,113 +1,51 @@
 import React, {useState} from "react";
-import axios from 'axios';
-import './LoginForm.css';
-import HomePage from './HomePage';
+import Axios from 'axios';
+import './LoginForm.css'
+import axios from "axios";
 
-class LoginForm extends React.Component{
+class LoginForm extends React.Component {
+
 
     state = {
-
-        username:'',
-        password:'',
-        users: []
-
-    };
-
-    componenetDidMount = () => {
-
-        this.resetUserInputs();
-
-    };
-
-    getLoginData = () => {
-
-        axios.get('http://localhost:3001/homepage')
-            .then((response) => {
-
-                const data = response.data;
-                this.setState({users: data});
-                console.log('Data has been received!!');
-
-            })
-            .catch(() => {
-
-                console.log('Error retrieving data!!');
-
-            })
-
-
+        username: '',
+        password: ''
     }
 
-    submit = (event) => {
-
-        const boolVal = false;
-
-        event.preventDefault();
-
-        const payload = {
-
-            username: this.state.username,
-            password: this.state.password
-
-        };
-
-        this.state.users.map((user, index) => {
-
-            if((payload.username === user.username) && (payload.password !== user.password)){
-
-                console.log("Password inputed for the user is not correct");
-
-            }
-
-            if((payload.username === user.username) && (payload.password === user.password)){
-
-
-                boolVal = true;
-
-            }
-
-        });
-
-        if(boolVal){
-
-            return <HomePage />;
-
-        }
-
-    }
-
-    resetUserInputs = () => {
-
+    eventHandler = (event) => {
         this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
 
-            username:'',
-            password:''
-
-        });
-
-    };
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.loginUser(this.state.username, this.state.password);
+        
+    }
 
 
     render(){
-
     return (
 
         <div className="loginform">
-            <form>
-                <input type="text" id="username" name="username"></input>
+            <form onSubmit={this.handleSubmit}>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" name="username" onChange={this.eventHandler}></input>
                 <br></br>
-                <input type="text" id="password" name="password"></input>
+                <label htmlFor="password">Password:</label>
+                <input type="text" id="password" name="password" onChange={this.eventHandler}></input>
                 <br></br>
                 <br></br>
                 <button type="login">Login</button>
+                <button type="login">Sign Up</button>
                 <br></br>
                 <br></br>
             </form>
         </div>
-       
+
     );
-
+    }
 }
 
-}
 export default LoginForm;
+
