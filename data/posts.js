@@ -3,6 +3,7 @@ const postList = mongoCollections.posts;
 const helpers = require("./datahelpers");
 const {ObjectId} = require('mongodb');
 const users = mongoCollections.users;
+const helpers = require("./datahelpers");
 
 
 
@@ -15,6 +16,7 @@ const createPost = async (
   
       const postCollection = await postList();
       username = username.toLowerCase();
+      helpers.isString(username);
       const userCollection = await users();
   
       const newPostInfo = {
@@ -41,35 +43,29 @@ const createPost = async (
   
   };
 
-  // const getPostById = async (postId) => {
-  //   //console.log(movieId);
-  //   helpers.checkId(postId);
-  //   const postCollection = await postList();
-  //   return await postCollection.findOne({_id: ObjectId(postId)})
+
+  // const removePost = async (movieId) => {
+  //   movieId = helper.checkId(movieId);
+  //   const movieCollection = await movies();
   
+  //   return await movieCollection.deleteOne({_id: ObjectId(movieId)});
   // };
 
-  const removePost = async (movieId) => {
-    movieId = helper.checkId(movieId);
-    const movieCollection = await movies();
-  
-    return await movieCollection.deleteOne({_id: ObjectId(movieId)});
-  };
-
-  const getPostsByFollowers = async(username) => {
+  const getPostsByFollowed = async(username) => {
     const userCollection = await users();
     username = username.toLowerCase();
+    helpers.isString(username);
 
     const oneUser = await userCollection.findOne({username:username});
 
     //TUTOR How do I add new posts from people that I follow into the database in the user collection?
 
     console.log(oneUser);
-    let renderedPosts = oneUser.followedUsers.posts;
+    let followers = oneUser.followedUsers;
 
-    console.log(renderedPosts);
+    console.log(followers);
 
-    return renderedPosts;
+    return followers;
 
   }
   
@@ -77,5 +73,5 @@ const createPost = async (
 
 
 
-  module.exports = { createPost, getPostsByFollowers, removePost };
+  module.exports = { createPost, getPostsByFollowed };
 

@@ -43,6 +43,19 @@ const getAllJobs = async () => {
     const userCollection = await users();
 
     let nameOfUser = username.toLowerCase();
+    helper.isString(nameOfUser);
+    helper.isString(jobTitle);
+    helper.isString(education);
+    helper.isString(description);
+    helper.isString(company);
+    helper.isValidDate(postDate);
+
+    if(isNaN(yearsofExp)) throw "Years of experience must be a number!";
+
+
+
+
+
 
     const foundUser = await userCollection.findOne({username:nameOfUser});
 
@@ -59,7 +72,7 @@ const getAllJobs = async () => {
 
     let foundCompany = await companyCollection.findOne({company:companyName});
 
-    //console.log(foundCompany);
+    console.log(foundCompany);
 
 
       
@@ -87,81 +100,6 @@ const getAllJobs = async () => {
 
   console.log(newJobInfo);
     return newJobInfo;
-
-
-
-
-
-      /*const jobCollection = await jobListings();
-      const userCollection = await users ();
-      const foundUser = await userCollection.findOne({username:username});
-      if (!foundUser) throw "Wrong username!";
-      //we need the id of the person who created the job
-     // console.log(foundUser);
-     // let userID = foundUser._id.toString();
-
-      let userID = foundUser._id.toHexString()
-
-      console.log(userID);
-
-
-      const companyCollection = await companyList();
-
-      let companyName = company.toLowerCase();
-
-      //console.log(companyName);
-
-      const foundCompany = await companyCollection.findOne({company:companyName});
-      //console.log("foundCompany: ", foundCompany);
-      if(!foundCompany) {
-      throw "Sorry. This Company exists. Please enter a distinct name.";
-    }
-
-
-    //console.log(foundCompany);
-
-
-
-
-      //console.log(userID);
-
-     
-      
-  
-      const newJobInfo = {
-        userID: ObjectId(userID),
-        jobTitle: jobTitle,
-        education: education,
-        yearsofExp: yearsofExp,
-        description: description,
-        company: companyName,
-        postDate: postDate,
-        username: username
-
-        
-      };
-
-      console.log(newJobInfo);
-
-      const oneCompany = await companyList.getCompanyByName(companyName);
-
-     // const companyID = oneCompany._id;
-
-     // console.log(oneCompany);
-
-
-
-     // await companyCollection.updateMany({ company: companyName }, { $push: { jobs: newJobInfo } });
-
-      console.log("1");
-   
-  
-      const insertInfo = await jobCollection.insertOne(newJobInfo);
-      if (!insertInfo.acknowledged || !insertInfo.insertedId)
-        throw 'Could not add job';
-  
-    console.log(newJobInfo);
-      return newJobInfo;*/
 
   
   };
