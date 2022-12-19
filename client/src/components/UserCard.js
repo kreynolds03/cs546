@@ -1,28 +1,12 @@
 import React from "react"
-
+import ViewFullPost from "./ViewFullPost"
 export default class UserCard extends React.Component{
 
-   
-renderPosts = () => {
-    this.props.user.posts.map(post => {
-        return <div>
-            <h5>{post.title}</h5>
-            <p>{post.content}</p>
-        </div>
-    })
-}
-
-renderFollowedUsers = () => {
-    this.props.user.followedUsers.map(user => {
-        return <p>{user}</p>
-    })
-}
 
     render(){
 
         return(
             <div>
-                { console.log(this.props.user)}
                 <h1>Welcome, {this.props.user.username}</h1>
                 <h3>Name: {this.props.user.firstName}</h3>
                 <h4>Birthday: {this.props.user.birthday}</h4>
@@ -30,9 +14,16 @@ renderFollowedUsers = () => {
                 <p>Bio: {this.props.user.bio}</p>
                 <p>Skills: {this.props.user.skills}</p>
                 <h4>Posts</h4>
-                {this.renderPosts()}
+                {console.log(this.props.user.posts)}
+                {this.props.user.posts.map(post => {
+                return <div>
+                    <ViewFullPost post = {post}/>
+                    </div>
+                    })}
                 <h4>Followed Users: </h4>
-                {this.renderFollowedUsers()}
+                {this.props.user.followedUsers.map(user => {
+                 return <p>{user}</p>
+                })}
             </div>
         )
     }
