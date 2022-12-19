@@ -95,14 +95,13 @@ const createUser = async (
     birthday: birthday,
     firstName: firstName,
     bio: null,
-    logo: null,
     jobs: [],
     posts: [],
     comments: [],
     followedUsers: [],
     likedPosts: [],
     jobListings: [],
-    skills: []
+    skills: null
 
   };
 
