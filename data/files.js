@@ -6,7 +6,7 @@ const Binary = require("mongodb").Binary;
 const {ObjectId} = require('mongodb');
 
 
-const uploadFile = async (filename, username, fileStream, jobListingId) => {
+const uploadFile = async (filename, username, jobListingId) => {
 
    
 
@@ -17,7 +17,6 @@ const uploadFile = async (filename, username, fileStream, jobListingId) => {
     const jobCollection = await jobList();
 
 
-    const data = Binary(fileStream);
 
     const nameOfUser = username.toLowerCase();
 
@@ -39,7 +38,6 @@ const uploadFile = async (filename, username, fileStream, jobListingId) => {
     const newFileInfo = {
         username: username,
         filename: filename,
-        data: data,
         jobListingId: ObjectId(jobListingId)
     }
 

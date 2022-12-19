@@ -503,12 +503,11 @@ router.route("/logout").post(async (req, res) => {
  
     let filename = updatedData.filename;
     let username = updatedData.username;
-    let fileStream = updatedData.filestream;
     let jobId = updatedData.jobId;
 
     try {
       //console.log(req.params.username);
-      const userResume = await fileList.uploadFile(filename, username, fileStream, jobId);
+      const userResume = await fileList.uploadFile(filename, username, jobId);
       //console.log(req.params._id);
       res.status(200).json(userResume);
     } catch (e) {
