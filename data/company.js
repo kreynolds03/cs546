@@ -38,7 +38,7 @@ const createCompany = async (
 
     const companyCollection = await companyList();
 
-    const foundCompany = await companyCollection.findOne({companyName});
+    const foundCompany = await companyCollection.findOne({company:companyName});
     console.log("foundCompany: ", foundCompany);
     if(!foundCompany) {
     throw "Sorry. This company does not exist. Create a company if you own one!";

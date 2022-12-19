@@ -514,11 +514,11 @@ router.route("/logout").get(async (req, res) => {
   })
 
     router
-    .route("/:companyName/claimcompany")
+    .route("/claimcompany/:company")
     .post(async (req, res) => {
       const updatedData = req.body;
 
-      let companyName = req.params.companyName;
+      let companyName = req.params.company;
       let username = updatedData.username;
 
 
