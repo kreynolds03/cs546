@@ -50,7 +50,7 @@ const createCompany = async (
 
   }
 
-  const updatedCompany = await companyCollection.updateOne({company:companyName}, {$set:{company:companyOwner}});
+  const updatedCompany = await companyCollection.updateOne({company:companyName}, {$set:{companyOwner:username}});
 
 
   return updatedCompany;
@@ -86,4 +86,4 @@ const createCompany = async (
 
 
 
-  module.exports = {createCompany, getCompanyByName};
+  module.exports = {createCompany, getCompanyByName, claimCompany};

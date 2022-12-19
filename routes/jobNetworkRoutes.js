@@ -511,6 +511,27 @@ router.route("/logout").get(async (req, res) => {
       res.status(404).json({error: e});
     }
 
+  })
+
+    router
+    .route("/:companyName/claimcompany")
+    .post(async (req, res) => {
+      const updatedData = req.body;
+
+      let companyName = req.params.companyName;
+      let username = updatedData.username;
+
+
+      try {
+        //console.log(req.params.username);
+        const claimMyCompany = await companyList.claimCompany(companyName, username);
+        //console.log(req.params._id);
+        res.status(200).json(claimMyCompany);
+      } catch (e) {
+        console.log(e);
+        res.status(404).json({error: e});
+      }
+
 
 
   })
