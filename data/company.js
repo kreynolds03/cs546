@@ -15,7 +15,8 @@ const createCompany = async (
         company: companyName,
         about: about,
         people: [],
-        jobs: []
+        jobs: [],
+        companyOwner : null
         
       };
     const foundCompany = await companyCollection.findOne({companyName});
@@ -26,12 +27,41 @@ const createCompany = async (
   
       const insertInfo = await companyCollection.insertOne(newCompanyInfo);
       if (!insertInfo.acknowledged || !insertInfo.insertedId)
-        throw 'Could not add post';
+        throw 'Could not add company';
   
     console.log(newCompanyInfo);
       return newCompanyInfo;
   
   };
+
+  const claimCompany = async (companyName, username) => {
+
+    const companyCollection = await companyList();
+
+    const foundCompany = await companyCollection.findOne({companyName});
+    console.log("foundCompany: ", foundCompany);
+    if(!foundCompany) {
+    throw "Sorry. This company does not exist. Create a company if you own one!";
+  }
+
+  if(foundCompany.companyOwner) {
+
+    throw "This company already has an owner!"
+
+  }
+
+  const updatedCompany = await companyCollection.updateOne({company:companyName}, {$set:{company:companyOwner}});
+
+
+  return updatedCompany;
+
+
+
+
+
+  }
+
+
 
 
   const getCompanyByName = async (company) => {
