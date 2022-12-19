@@ -79,6 +79,13 @@ const createUser = async (
     throw "Sorry. This username is taken. Please try another username";
   }
 
+  const foundEmail = await userCollection.find({email}).toArray();
+  console.log("foundEmail: ", foundEmail);
+  if(foundEmail.length > 0) {
+    throw "Sorry. This email is already used. Please check if you already have an account!";
+  }
+
+
   const hash = await bcrypt.hash(password, 10)
   const newUser = 
   {
