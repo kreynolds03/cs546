@@ -105,6 +105,10 @@ if(!user && signUp){
     return <SignUp setSignUp = {setSignUp} />
 }
 
+if(showJob) {
+    return <Apply setShowJob = {setShowJob}  currentJob = {currentJob} user = {sessionStorage.getItem('user')}/>
+}
+
 
  return(
  <div>

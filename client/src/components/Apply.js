@@ -9,7 +9,7 @@ function Apply({setShowJob, job}) {
 const [usersResume, setUsersResume] = useState(null);
 function onChangeHandler(files) {
     setUsersResume(files);
-    axios.post()
+    axios.post('http://127.0.0.1:3001/uploadresume',{})
 
 }
 
