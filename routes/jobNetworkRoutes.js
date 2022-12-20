@@ -381,6 +381,7 @@ router.route("/logout").post(async (req, res) => {
    try{
      const username = req.body.username;
     const title = req.body.title;
+    console.log("1");
 
     await likes.addLike(username,title);
     return res.sendStatus(200);
