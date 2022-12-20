@@ -23,6 +23,20 @@ export default class CreateCompany extends React.Component {
             company: this.state.company,
             about: this.state.about
         }
+        
+        if(!data.company || !data.about){
+
+            alert("Fields cannot be empty");
+            return;
+
+        }
+
+        if((data.company.trim().length === 0) || (data.about.trim().length === 0)){
+
+            alert("Fields cannot have spaces only");
+            return;
+
+        }
 
         axios.post('http://127.0.0.1:3001/createcompany', data)
         .then(res => alert('Thanks for creating the company!'))
