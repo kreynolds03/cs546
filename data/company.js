@@ -4,23 +4,21 @@ const helpers = require("./datahelpers");
 
 const createCompany = async (
     company,
-    about,
-    username
+    about
   ) => { 
   
       const companyCollection = await companyList();
 
       let companyName = company.toLowerCase();
       helpers.isString(companyName);
-      helpers.isString(username);
+      //helpers.isString(username);
       
   
       const newCompanyInfo = {
         company: companyName,
         about: about,
         people: [],
-        jobs: [],
-        companyOwner : username
+        jobs: []
         
       };
     const foundCompany = await companyCollection.findOne({companyName});

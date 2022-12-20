@@ -5,7 +5,9 @@ import Logout from './Logout'
 
 export default function NavBar(props){
 
-    console.log("From the nav bar, user", props.user);
+    const user = sessionStorage.getItem("user");
+    console.log("From the nav bar, user", user);
+
 
     return(
         <div>
@@ -16,7 +18,7 @@ export default function NavBar(props){
             <a href='/jobs'>Jobs</a>
             <br></br>
             <a href='/profile'>Profile Page</a>
-            {props.user && <Logout />}
+            {user && <Logout />}
         </div>
     )
 }

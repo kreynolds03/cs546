@@ -26,7 +26,7 @@ export default class CreateCompany extends React.Component {
 
         axios.post('http://127.0.0.1:3001/createcompany', data)
         .then(res => alert('Thanks for creating the company!'))
-        .catch(err => alert('You have recieved the following error: ' + err))
+        .catch(err => console.log('You have recieved the following error: ', err))
 
     }
 

@@ -116,7 +116,7 @@ if(showJob) {
  <div>
     <Router>
 
-        <NavBar />
+        <NavBar user = {JSON.parse(sessionStorage.getItem('user'))} />
 
         <Routes>
             <Route path='/' element={<HomePage user = {JSON.parse(sessionStorage.getItem('user'))}/>}>HomePage</Route>

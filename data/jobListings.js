@@ -36,7 +36,6 @@ const getAllJobs = async () => {
     yearsofExp,
     description,
     company,
-    postDate,
     username
   ) => { 
 
@@ -48,9 +47,9 @@ const getAllJobs = async () => {
     helper.isString(education);
     helper.isString(description);
     helper.isString(company);
-    helper.isValidDate(postDate);
+    //helper.isValidDate(postDate);
 
-    if(isNaN(yearsofExp)) throw "Years of experience must be a number!";
+    //if(isNaN(yearsofExp)) throw "Years of experience must be a number!";
 
 
 
@@ -83,7 +82,7 @@ const getAllJobs = async () => {
       yearsofExp: yearsofExp,
       description: description,
       company: companyName,
-      postDate: postDate,
+      postDate: null,
       username: username,
       userId: userId
     };

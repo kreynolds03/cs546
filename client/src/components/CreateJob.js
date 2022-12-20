@@ -54,7 +54,7 @@ export default class CreateJob extends React.Component{
 
         }
 
-        axios.post('http://127.0.0.1:3001/createJob', data)
+        axios.post('http://127.0.0.1:3001/createjob', data)
         .then(res => alert('You have created a '))
         .catch(err => alert('You have recieved the following error: ' + err))
     }
