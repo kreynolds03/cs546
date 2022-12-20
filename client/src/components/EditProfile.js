@@ -28,6 +28,20 @@ export default class EditProfile extends React.Component{
         };
 
         console.log(editedUser)
+        
+        if(!editedUser.bio){
+
+            alert("Bio Field Not Provided");
+            return;
+
+        }
+
+        if(editedUser.bio.trim().length === 0){
+
+            alert("Bio Field Cannot consist of empty spaces only");
+            return;
+
+        }
 
         axios.put('http://localhost:3001/editprofile', editedUser)
         .then(this.props.getUserData(this.props.user.username))
