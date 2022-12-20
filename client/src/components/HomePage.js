@@ -18,36 +18,43 @@ function HomePage(props) {
 
 
 
-    React.useEffect(() => {
-
-        renderFollowedPosts();
     
-    
-    }, [posts])
 
 
     const changeState = () => {
         setCreatePost(!createPost)
     }
 
-    const renderFollowedPosts = () => {
+    
+
+    React.useEffect(() => {
+
         console.log("This is props.user", props.user);
         const userPosts = [];
         props.user.followedUsers.map(username => {
             axios.get(`http://localhost:3001/${username}/activity`)
             .then(res => {
                     console.log("Showing the data", res.data)
+                    res.data.forEach((post) => {
+                        userPosts.push(post);
+                    })
+                    console.log("Here are all posts of users", userPosts)
+
+                    setPosts(userPosts);
                 /*res.data.posts.map(post => {
                     let newArr = [...posts];
                     newArr.push(post)
                     setPosts(newArr)
                 })*/
             })
-            .then(console.log(posts))     
+            .catch(error => console.log("error",error))
         
         })
 
-    }
+    
+    
+    
+    }, [])
 
 
 
@@ -58,6 +65,19 @@ function HomePage(props) {
 
                 <button onClick={changeState}>Create A Post</button>
                 {createPost ? <CreatePost username = {props.user.username} setCreatePost = {changeState}/> : <></>}
+                {posts.map(post=>{ 
+                    return (
+                        <div key={post._id}>
+                            <p>username: {post.username}</p>
+                            <p>title: {post.title}</p>
+                            <p>content: {post.content}</p>
+
+
+
+
+                        </div>
+                    )
+                })}
                 
             </div>
         )

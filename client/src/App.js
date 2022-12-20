@@ -59,7 +59,7 @@ const checkUser = () => {
 
 }
 
-const getUserData = (username) =>{
+const getUserData = (username, token) =>{
 
     axios.get(`http://localhost:3001/profile/${username}`)
         .then(res => res.data)
@@ -69,7 +69,7 @@ const getUserData = (username) =>{
             // Add session data logic
             console.log("data:", data);
             console.log("user:", data);
-            sessionStorage.setItem("user", JSON.stringify(data));
+            sessionStorage.setItem("user", JSON.stringify({...data,token}));
 
         })
 
@@ -84,7 +84,8 @@ const loginUser = (username, password) => {
         axios.post('http://localhost:3001/login', data)
         .then(res => res.data)
         .then(data => {
-            getUserData(username);
+            console.log(data, "This should show when logging in");
+            getUserData(username, data.token);
             // console.log(sessionStorage);
 
         })
