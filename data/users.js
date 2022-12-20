@@ -178,24 +178,28 @@ const updateUser = async (username, bio, skills) => {
 
   const profile = 
   {
+    username: nameOfUser,
     bio: bio,
-    skills:skills
+    skills: skills
   
   }
 
 
 
+
   const userCollection = await users();
 
-  const updatedUserProfile = await userCollection.updateMany(
+
+  const findMe = await userCollection.findOne({username:nameOfUser})
+
+
+  const updatedUserProfile = await userCollection.updateOne(
     {username:nameOfUser},
-    {$set: profile}
+    {$set: {bio:profile.bio, skills:profile.skills}}
   );
 
-  
 
-
-  return updates;
+  return profile;
 
 
 }

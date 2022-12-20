@@ -9,9 +9,8 @@ function isAlpha(str) {
 }
 
 function isString(val) {
-	if(typeof username !== 'string') {
-		throw "Please supply only a string value for both username and password";
-	  }
+  if (typeof val !== 'string') throw `${val} must be a string`;
+	
 }
 
 
