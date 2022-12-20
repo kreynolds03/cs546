@@ -1,5 +1,6 @@
 
 import React from 'react'
+import Logout from './Logout'
 
 
 export default function NavBar(){
@@ -13,6 +14,7 @@ export default function NavBar(){
             <a href='/jobs'>Jobs</a>
             <br></br>
             <a href='/profile'>Profile Page</a>
+            <Logout />
         </div>
     )
 }

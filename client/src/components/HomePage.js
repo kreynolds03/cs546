@@ -3,32 +3,47 @@ import React from "react"
 import CreatePost from "./CreatePost"
 
 
-export default class HomePage extends React.Component{
+function HomePage(props) {
 
-    state = {
+    /*state = {
         createPost: false,
         posts: []
+    }*/
+
+    const [createPost, setCreatePost] = React.useState(false);
+
+    const [posts, setPosts] = React.useState([]);
+
+
+
+
+
+    React.useEffect(() => {
+
+        renderFollowedPosts();
+    
+    
+    }, [posts])
+
+
+    const changeState = () => {
+        setCreatePost(!createPost)
     }
 
-
-    changeState = () => {
-        this.setState({
-            createPost: !this.state.createPost
-        })
-    }
-
-    renderFollowedPosts = () => {
-        this.props.user.followedUsers.map(username => {
-            axios.get(`http://localhost:3001/profile/${username}`)
+    const renderFollowedPosts = () => {
+        console.log("This is props.user", props.user);
+        const userPosts = [];
+        props.user.followedUsers.map(username => {
+            axios.get(`http://localhost:3001/${username}/activity`)
             .then(res => {
-                console.log(res.data)
-                res.data.posts.map(post => {
-                let newArr = this.state.posts
-                newArr.push(post)
-                this.setState({
-                    posts: newArr
-                })})
-            }).then(console.log(this.state.posts))     
+                    console.log("Showing the data", res.data)
+                /*res.data.posts.map(post => {
+                    let newArr = [...posts];
+                    newArr.push(post)
+                    setPosts(newArr)
+                })*/
+            })
+            .then(console.log(posts))     
         
         })
 
@@ -37,15 +52,16 @@ export default class HomePage extends React.Component{
 
 
 
-    render(){
+    
         return(
             <div>
 
-                <button onClick={this.changeState}>Create A Post</button>
-                {console.log(this.state.createPost)}
-                {this.state.createPost? <CreatePost username = {this.props.user.username} setCreatePost = {this.changeState}/> : <></>}
-                {this.renderFollowedPosts()}
+                <button onClick={changeState}>Create A Post</button>
+                {createPost ? <CreatePost username = {props.user.username} setCreatePost = {changeState}/> : <></>}
+                
             </div>
         )
-    }
+    
 }
+
+export default HomePage;
