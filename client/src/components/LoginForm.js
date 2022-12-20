@@ -18,7 +18,44 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
+
+        if(!this.state.username || !this.state.password) {
+            alert("Please supply both a username and password");
+            return;
+          }
+
+          if((this.state.username.trim().length === 0) || (this.state.password.trim().length === 0)){
+
+            alert("Username and Password Fields cannot be Empty");
+            return;
+
+          }
+        
+          if(typeof this.state.username !== 'string') {
+            alert("Please supply only a string value for username");
+            return;
+          }
+        
+        
+          if(typeof this.state.password !== 'string') {
+            alert("Please supply only a string value for password");
+            return;
+          }
+        
+        
+          if(this.state.password.length < 6 || this.state.username.length < 4) {
+            alert("Your username or password was too short in length");
+            return;
+          }
+
+          if(/^[A-Za-z0-9]*$/.test(this.state.username) == false) {
+
+            alert("You can only enter alphanumeric characters in your username");
+            return;
+        
+        }
+
         this.props.loginUser(this.state.username, this.state.password);
         
     }
@@ -52,4 +89,3 @@ class LoginForm extends React.Component {
 }
 
 export default LoginForm;
-

@@ -14,15 +14,17 @@ const addLike = async (username, title) =>{
 
     //format username
     let nameOfUser = username.toLowerCase();
-    helpers.isString(nameOfUser);
+    //helpers.isString(nameOfUser);
     //find user by username
     const foundUser = await userCollection.findOne({username:nameOfUser});
     //capture userID
+    console.log(foundUser);
     let userID = foundUser._id;
 
 
     //find the post by the title
     const foundPost = await postCollection.findOne({title: title});
+    console.log(foundPost);
 
     let postID = foundPost._id;
 
@@ -33,6 +35,7 @@ const addLike = async (username, title) =>{
         userID: userID,
         postID: postID
     };
+    console.log(newLike);
 
 
     //insert into like collection
@@ -41,7 +44,7 @@ const addLike = async (username, title) =>{
       throw 'Could not add ';
 
     //update both user and post collection to reflect the new like
-    const updatedUser = await userCollection.updateOne({username:nameOfUser}, {$push:{likes:newLike}});
+    const updatedUser = await userCollection.updateOne({username:nameOfUser}, {$push:{likedPosts:newLike}});
     const updatedPost = await postCollection.updateOne({title:title}, {$push:{likes:newLike}});
 
 
