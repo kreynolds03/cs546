@@ -32,6 +32,27 @@ export default class CreateJob extends React.Component{
             company: this.state.company,
             postDate: new Date()
         }
+        
+        if(!data.jobTitle || !data.education || !data.yearsOfExp || !data.description || !data.company){
+
+            alert("All Fields cannot be empty");
+            return;
+
+        }
+
+        if((data.jobTitle.trim().length === 0) || (data.education.trim().length === 0) || (data.yearsOfExp.trim().length === 0) || (data.description.trim().length === 0) || (data.company.trim().length === 0)){
+
+            alert("Fields cannot consist only of empty spaces");
+            return;
+
+        }
+
+        if(isNaN(data.yearsOfExp)){
+
+            alert("Years of experience must be a number!");
+            return;
+
+        }
 
         axios.post('http://127.0.0.1:3001/createJob', data)
         .then(res => alert('You have created a '))
