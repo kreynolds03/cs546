@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { isValidDate } from "./utils/datahelpers"
 
 
 
@@ -146,47 +147,78 @@ class SignUp extends React.Component{
 
         };
 
+        // const errors = [];
+
 
         if(!payload.username || !payload.password || !payload.lastName || !payload.firstName || !payload.birthday || !payload.email) {
-            throw "Please supply, first name, lastname, email, birthday, username, and password";
+            alert("You must supply all fields (Email, Password, Username, Birthday, First Name, and Last Name)");
+            return;
           }
         
           //console.log(2);
+
+          if((payload.username.trim().length === 0) || (payload.password.trim().length === 0) || (payload.email.trim().length === 0) || (payload.birthday.trim().length === 0) || (payload.firstName.trim().length === 0) || (payload.lastName.trim().length === 0)){
+
+            alert("Email, Password, Username, Birthday, First Name, and Last Name cannot consist of empty spaces");
+            return;
+
+          }
         
         
           if(typeof payload.username !== 'string') {
-            throw "Please supply only a string value for username";
+            alert("Please supply only a string value for username");
+            return;
           }
         
           //console.log(3);
         
         
           if(typeof payload.password !== 'string') {
-            throw "Please supply only a string value for password";
+            alert("Please supply only a string value for password");
+            return;
           }
         
           if(typeof payload.firstName !== 'string' || typeof payload.lastName != 'string') {
-            throw "Please supply only a string value for first name and last name";
+            alert ("Please supply only a string value for first name and last name");
+            return;
           }
         
           //console.log(4);
         
         
           if(payload.password.length < 6 || payload.username.length < 4) {
-            throw "Your username or password was too short in length";
+            alert ("Your username or password was too short in length");
+            return;
           }
 
           // helpers.isAlpha(payload.username);
 
           if(/^[A-Za-z0-9]*$/.test(payload.username) == false) {
 
-            throw "You can only enter alphanumeric characters in your username";
+            alert ("You can only enter alphanumeric characters in your username");
+            return;
         
           }
 
+          if(/^[A-Za-z0-9]*$/.test(payload.firstName) == false) {
+
+            alert ("You can only enter alphanumeric characters in your First Name");
+            return;
+        
+          }
+
+          if(/^[A-Za-z0-9]*$/.test(payload.lastName) == false) {
+
+            alert ("You can only enter alphanumeric characters in your Last Name");
+            return;
+        
+          }
+
+
           if(!payload.email.includes("@")){
 
-            throw "Bad Email"
+            alert ("Bad Email");
+            return;
 
           }
 
@@ -194,28 +226,14 @@ class SignUp extends React.Component{
             
           if(emailArr[1] != "stevens.edu"){
 
-            throw "Bad Email"
+            alert ("Bad Email");
+            return;
 
           }
 
-          if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(payload.birthday)){
-           
-            throw "Please enter a proper date format of mm/dd/yyyy";
-          
-        }
-        // Parse the date parts to integers
-        var parts = payload.birthday.split("/");
-        var day = parseInt(parts[1], 10);
-        var month = parseInt(parts[0], 10);
-        var year = parseInt(parts[2], 10);
+          isValidDate(payload.birthday);
 
-    // Check the ranges of month and year
-        if(month == 0 || month > 12 || year > 2022 || year < 1000){
-
-            throw "Enter a proper date please!";
-        
-        }
-        
+        // console.log("No Errors");
 
         axios({
 
@@ -262,7 +280,6 @@ class SignUp extends React.Component{
 
             <div className='signUp'>,
                 <form onSubmit={this.submit}>
-
                     <label htmlFor="email">Email: </label>
                     <input type="text" id="email" name="email" value={this.state.email} onChange={this.eventHandler}></input>
                     <br></br>
@@ -282,6 +299,7 @@ class SignUp extends React.Component{
                     <input type="text" id="lastName" name="lastName" value={this.state.lastName} onChange={this.eventHandler}></input>
                     <br></br>
                     <button>Submit</button>
+                    <a href='/login'>Back To Login Page</a>
                 </form>
             </div>
 
