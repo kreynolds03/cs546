@@ -26,6 +26,20 @@ export default class CreatePost extends React.Component {
             title: this.state.title,
             content: this.state.content,
         }
+        
+        if(!data.title || !data.content){
+
+            alert("Title and Content Fields cannot be Empty");
+            return;
+
+        }
+
+        if((data.title.trim().length === 0) || (data.content.trim().length === 0)){
+
+            alert("Title and Content cannot consist of spaces only");
+            return;
+
+        }
 
         axios.post('http://localhost:3001/createPost', data)
         .then(res => alert('Post Created!'))
